@@ -1,0 +1,66 @@
+<!--
+  #%L
+  GwtBootstrap3
+  %%
+  Copyright (C) 2013 GwtBootstrap3
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+    <ui:with field="nameTokens" type="com.metashop.app.client.NameTokens"/>
+
+    <g:ScrollPanel>
+        <b:Container>
+        
+            <b:Navbar position="FIXED_TOP">
+                <b:Container>
+                    <b:NavbarHeader>
+                        <b:NavbarBrand targetHistoryToken="{nameTokens.getHome}" ui:field="brand">Dia en la Piscina</b:NavbarBrand>
+                        <b:NavbarCollapseButton dataTarget="#navbar-collapse"/>
+                    </b:NavbarHeader>
+                    <b:NavbarCollapse b:id="navbar-collapse" ui:field="navbarCollapse">
+                        <b:NavbarNav>
+                        
+                            <b:ListDropDown>
+                                <b:AnchorButton dataToggle="DROPDOWN">CSS</b:AnchorButton>
+                                <b:DropDownMenu>
+                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getBlogSingle}">Blog Single</b:AnchorListItem>
+                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getBlog}">Blog</b:AnchorListItem>
+                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getCart}">Cart</b:AnchorListItem>
+                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getCheckOut}">Check Out</b:AnchorListItem>
+                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getContactUs}">Contact Us</b:AnchorListItem>
+                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getError}">Error</b:AnchorListItem>
+                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getIndex}">Index</b:AnchorListItem>
+                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getLogin}">Login</b:AnchorListItem>
+                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getProductDetails}">Product Details</b:AnchorListItem>
+                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getShop}">Shop</b:AnchorListItem>
+                                </b:DropDownMenu>
+                            </b:ListDropDown>
+                            
+                        </b:NavbarNav>
+                    </b:NavbarCollapse>
+                </b:Container>
+            </b:Navbar>
+
+            <!-- Container Content -->
+            <g:SimplePanel ui:field="contentContainer"/>
+
+        </b:Container>
+
+    </g:ScrollPanel>
+
+</ui:UiBinder>

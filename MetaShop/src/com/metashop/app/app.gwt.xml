@@ -1,0 +1,67 @@
+<!--
+  #%L
+  GwtBootstrap3
+  %%
+  Copyright (C) 2013 GwtBootstrap3
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+<module rename-to="app">
+    <inherits name="com.google.gwt.uibinder.UiBinder"/>
+    <inherits name="com.google.gwt.inject.Inject"/>
+	<inherits name="com.arcbees.analytics.Analytics"/>
+    <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
+    <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint'/>
+    <inherits name='org.gwtbootstrap3.extras.cachemanifest.Offline'/>
+    <add-linker name="offline"/>
+    <extend-configuration-property name="cachemanifest_static_files" value="/gwtbootstrap3-demo/GwtBootstrap3Demo.html"/>
+
+    <!-- For SDM -->
+    <add-linker name="xsiframe"/>
+    <set-configuration-property name="devModeRedirectEnabled" value="true"/>
+
+    <!-- Specify the paths for translatable code -->
+    <source path="client"/>
+    <source path="shared"/>
+
+    <!-- GWT Modules -->
+    <set-configuration-property name="gin.ginjector.modules" value="com.metashop.app.client.ClientModule"/>
+    
+    <!-- Customized stylesheet  -->
+	<!-- stylesheet src="resource/css/animate.css"></stylesheet>
+	<stylesheet src="resource/css/bootstrap.min.css"></stylesheet>
+	<stylesheet src="resource/css/demo.css"></stylesheet>
+	<stylesheet src="resource/css/font-awesome.min.css"></stylesheet>
+	<stylesheet src="resource/css/main.css"></stylesheet>
+	<stylesheet src="resource/css/prettify.css"></stylesheet>
+	<stylesheet src="resource/css/preetyPhoto.css"></stylesheet>
+	<stylesheet src="resource/css/price-range.css"></stylesheet>
+	<stylesheet src="resource/css/responsive.css"></stylesheet-->
+	
+	<!--  for copying classpath resources (different to webresources) -->
+	<!-- inherits name="Resources"/-->
+	
+	<!-- script src='resource/js/prettify.js'/>
+	<script src='resource/js/contact.js'/>
+	<script src='resource/js/gmaps.js'/>
+	<script src='resource/js/html5shiv.js'/>
+	<script src='resource/js/jquery.prettyPhoto.js'/>
+	<script src='resource/js/jquery.scrollUp.min.js'/>
+	<script src='resource/js/lang-css.js'/>
+	<script src='resource/js/main.js'/>
+	<script src='resource/js/price-range.js'/-->
+
+    <entry-point class="com.metashop.app.client.AppEntryPoint"/>
+
+</module>

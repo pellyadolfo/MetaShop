@@ -35,8 +35,6 @@ import com.metashop.app.client.error.ErrorPresenter;
 import com.metashop.app.client.error.ErrorView;
 import com.metashop.app.client.home.HomePresenter;
 import com.metashop.app.client.home.HomeView;
-import com.metashop.app.client.index.IndexPresenter;
-import com.metashop.app.client.index.IndexView;
 import com.metashop.app.client.login.LoginPresenter;
 import com.metashop.app.client.login.LoginView;
 import com.metashop.app.client.productdetails.ProductDetailsPresenter;
@@ -53,9 +51,6 @@ public class ApplicationModule extends AbstractPresenterModule {
         // Main Application View
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class, ApplicationPresenter.MyProxy.class);
 
-        // General Views
-        bindPresenter(HomePresenter.class, HomePresenter.MyView.class, HomeView.class, HomePresenter.MyProxy.class);
-        
         // eshoping
         bindPresenter(BlogPresenter.class, BlogPresenter.MyView.class, BlogView.class, BlogPresenter.MyProxy.class);
         bindPresenter(BlogSinglePresenter.class, BlogSinglePresenter.MyView.class, BlogSingleView.class, BlogSinglePresenter.MyProxy.class);
@@ -63,7 +58,7 @@ public class ApplicationModule extends AbstractPresenterModule {
         bindPresenter(CheckOutPresenter.class, CheckOutPresenter.MyView.class, CheckOutView.class, CheckOutPresenter.MyProxy.class);
         bindPresenter(ContactUsPresenter.class, ContactUsPresenter.MyView.class, ContactUsView.class, ContactUsPresenter.MyProxy.class);
         bindPresenter(ErrorPresenter.class, ErrorPresenter.MyView.class, ErrorView.class, ErrorPresenter.MyProxy.class);
-        bindPresenter(IndexPresenter.class, IndexPresenter.MyView.class, IndexView.class, IndexPresenter.MyProxy.class);
+        bindPresenter(HomePresenter.class, HomePresenter.MyView.class, HomeView.class, HomePresenter.MyProxy.class);
         bindPresenter(LoginPresenter.class, LoginPresenter.MyView.class, LoginView.class, LoginPresenter.MyProxy.class);
         bindPresenter(ProductDetailsPresenter.class, ProductDetailsPresenter.MyView.class, ProductDetailsView.class, ProductDetailsPresenter.MyProxy.class);
         bindPresenter(ShopPresenter.class, ShopPresenter.MyView.class, ShopView.class, ShopPresenter.MyProxy.class);

@@ -41,7 +41,7 @@ public class ClientModule extends AbstractPresenterModule {
         install(new ApplicationModule());
         install(new AnalyticsModule.Builder(ANALYTICS_ACCOUNT).build());
         
-        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.INDEX);
+        bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.HOME);
         bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.ERROR);
         bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.ERROR);
     }

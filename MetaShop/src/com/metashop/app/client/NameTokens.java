@@ -23,10 +23,7 @@ package com.metashop.app.client;
 /**
  * @author Joshua Godi
  */
-public class NameTokens {
-    // General Pages
-    public static final String HOME = "home";
-    
+public class NameTokens {   
     // eshoper
     public static final String BLOG = "blog";
     public static final String BLOGSINGLE = "blogsingle";
@@ -34,17 +31,12 @@ public class NameTokens {
     public static final String CHECKOUT = "checkout";
     public static final String CONTACTUS = "contactus";
     public static final String ERROR = "error";
-    public static final String INDEX = "index";
+    public static final String HOME = "home";
     public static final String LOGIN = "login";
     public static final String PRODUCTDETAILS = "productdetails";
     public static final String SHOP = "shop";
 
     // Getters for UiBinders
-
-    public static String getHome() {
-        return HOME;
-    }
-    
     public static String getBlog() {
         return BLOG;
     }
@@ -69,8 +61,8 @@ public class NameTokens {
         return ERROR;
     }
     
-    public static String getIndex() {
-        return INDEX;
+    public static String getHome() {
+        return HOME;
     }
     
     public static String getLogin() {

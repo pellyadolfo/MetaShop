@@ -29,7 +29,7 @@
             <b:Navbar position="FIXED_TOP">
                 <b:Container>
                     <b:NavbarHeader>
-                        <b:NavbarBrand targetHistoryToken="{nameTokens.getHome}" ui:field="brand">Dia en la Piscina</b:NavbarBrand>
+                        <b:NavbarBrand targetHistoryToken="{nameTokens.getHome}" ui:field="brand">MetaShop</b:NavbarBrand>
                         <b:NavbarCollapseButton dataTarget="#navbar-collapse"/>
                     </b:NavbarHeader>
                     <b:NavbarCollapse b:id="navbar-collapse" ui:field="navbarCollapse">
@@ -44,7 +44,6 @@
                                     <b:AnchorListItem targetHistoryToken="{nameTokens.getCheckOut}">Check Out</b:AnchorListItem>
                                     <b:AnchorListItem targetHistoryToken="{nameTokens.getContactUs}">Contact Us</b:AnchorListItem>
                                     <b:AnchorListItem targetHistoryToken="{nameTokens.getError}">Error</b:AnchorListItem>
-                                    <b:AnchorListItem targetHistoryToken="{nameTokens.getIndex}">Index</b:AnchorListItem>
                                     <b:AnchorListItem targetHistoryToken="{nameTokens.getLogin}">Login</b:AnchorListItem>
                                     <b:AnchorListItem targetHistoryToken="{nameTokens.getProductDetails}">Product Details</b:AnchorListItem>
                                     <b:AnchorListItem targetHistoryToken="{nameTokens.getShop}">Shop</b:AnchorListItem>

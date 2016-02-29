@@ -22,6 +22,8 @@
              xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
+    <ui:with field="nameTokens" type="com.metashop.app.client.NameTokens"/>
+
 	<g:HTMLPanel>
 	
 		<header id="header"><!--header-->
@@ -114,6 +116,11 @@
 								<li><a href="index.html">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
+                                    	<li><b:AnchorListItem targetHistoryToken="{nameTokens.getShop}">Products</b:AnchorListItem></li>
+                                    	<li><b:AnchorListItem targetHistoryToken="{nameTokens.getProductDetails}">Product Details</b:AnchorListItem></li>
+                                    	<li><b:AnchorListItem targetHistoryToken="{nameTokens.getCheckOut}">Checkout</b:AnchorListItem></li>
+                                    	<li><b:AnchorListItem targetHistoryToken="{nameTokens.getCart}">Cart</b:AnchorListItem></li>
+                                    	<li><b:AnchorListItem targetHistoryToken="{nameTokens.getLogin}">Login</b:AnchorListItem></li>
                                         <li><a href="shop.html">Products</a></li>
 										<li><a href="product-details.html">Product Details</a></li> 
 										<li><a href="checkout.html">Checkout</a></li> 

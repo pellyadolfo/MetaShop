@@ -21,7 +21,6 @@ package com.metashop.app.client;
  */
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.ScriptInjector;
 
 /**
  * @author Sven Jacobs

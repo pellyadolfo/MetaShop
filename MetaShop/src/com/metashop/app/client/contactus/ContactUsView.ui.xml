@@ -20,6 +20,8 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
             
+    <ui:with field="nameTokens" type="com.metashop.app.client.NameTokens"/>
+            
       <g:HTMLPanel>
       
       	<header id="header"><!--header-->
@@ -109,24 +111,23 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html">Home</a></li>
+                                <li><g:Hyperlink targetHistoryToken="{nameTokens.getHome}">Home</g:Hyperlink></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-										<li><a href="product-details.html">Product Details</a></li> 
-										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
+                                    	<li><g:Hyperlink targetHistoryToken="{nameTokens.getShop}">Products</g:Hyperlink></li>
+                                    	<li><g:Hyperlink targetHistoryToken="{nameTokens.getProductDetails}">Product Details</g:Hyperlink></li>
+                                    	<li><g:Hyperlink targetHistoryToken="{nameTokens.getCheckOut}">Checkout</g:Hyperlink></li>
+                                    	<li><g:Hyperlink targetHistoryToken="{nameTokens.getCart}">Cart</g:Hyperlink></li>
+                                    	<li><g:Hyperlink targetHistoryToken="{nameTokens.getLogin}">Login</g:Hyperlink></li>
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
+                                    	<li><g:Hyperlink targetHistoryToken="{nameTokens.getBlog}">Blog</g:Hyperlink></li>
+                                    	<li><g:Hyperlink targetHistoryToken="{nameTokens.getBlogSingle}">Blog Single</g:Hyperlink></li>
                                     </ul>
                                 </li> 
-								<li><a href="404.html">404</a></li>
-								<li><a href="contact-us.html" class="active">Contact</a></li>
+                                <li><g:Hyperlink targetHistoryToken="{nameTokens.getContactUs}">Contact Us</g:Hyperlink></li>
 							</ul>
 						</div>
 					</div>

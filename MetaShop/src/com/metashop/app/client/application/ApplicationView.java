@@ -36,13 +36,6 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
 
     @UiField
     SimplePanel contentContainer;
-    @UiField
-    NavbarCollapse navbarCollapse;
-
-    @Override
-    public NavbarCollapse getNavbarCollapse() {
-        return navbarCollapse;
-    }
 
     interface Binder extends UiBinder<Widget, ApplicationView> {
     }

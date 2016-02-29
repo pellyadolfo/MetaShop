@@ -32,7 +32,6 @@ import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import org.gwtbootstrap3.client.ui.NavbarCollapse;
 
 /**
  * @author Joshua Godi
@@ -44,7 +43,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     }
 
     public interface MyView extends View {
-        NavbarCollapse getNavbarCollapse();
     }
 
     /**
@@ -67,19 +65,9 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
                     public void execute() {
                         // Making the window scroll to top on every page change
                         Window.scrollTo(0, 0);
-                        // and collapse any nav menus
-                        hideNavbarCollapse();
                     }
                 });
             }
         });
-    }
-
-    private void hideNavbarCollapse() {
-        NavbarCollapse navbarCollapse = getView().getNavbarCollapse();
-        String ariaExpanded = navbarCollapse.getElement().getAttribute("aria-expanded");
-        if (Boolean.parseBoolean(ariaExpanded)) {
-            navbarCollapse.toggle();
-        }
     }
 }

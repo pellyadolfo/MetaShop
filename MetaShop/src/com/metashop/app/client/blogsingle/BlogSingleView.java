@@ -23,9 +23,9 @@ package com.metashop.app.client.blogsingle;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-public class BlogSingleView extends ViewImpl implements BlogSinglePresenter.MyView {
+public class BlogSingleView extends ViewWithUiHandlers<BlogSingleUiHandlers> implements BlogSinglePresenter.MyView {
     interface Binder extends UiBinder<Widget, BlogSingleView> {
     }
 
@@ -33,4 +33,9 @@ public class BlogSingleView extends ViewImpl implements BlogSinglePresenter.MyVi
     BlogSingleView(final Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
+    
+    /*@UiHandler("closeButton")
+    void onClose(ClickEvent event) {
+        getUiHandlers().sendName("pp");
+    }*/
 }

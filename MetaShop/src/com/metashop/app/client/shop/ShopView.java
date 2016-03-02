@@ -23,9 +23,9 @@ package com.metashop.app.client.shop;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-public class ShopView extends ViewImpl implements ShopPresenter.MyView {
+public class ShopView extends ViewWithUiHandlers<ShopUiHandlers> implements ShopPresenter.MyView {
     interface Binder extends UiBinder<Widget, ShopView> {
     }
 
@@ -33,4 +33,9 @@ public class ShopView extends ViewImpl implements ShopPresenter.MyView {
     ShopView(final Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
+    
+    /*@UiHandler("closeButton")
+    void onClose(ClickEvent event) {
+        getUiHandlers().sendName("pp");
+    }*/
 }

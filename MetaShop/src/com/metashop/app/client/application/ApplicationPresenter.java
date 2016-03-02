@@ -25,6 +25,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
@@ -36,13 +37,12 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 /**
  * @author Joshua Godi
  */
-public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
-
+public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> implements ApplicationUiHandlers {
     @ProxyStandard
     public interface MyProxy extends Proxy<ApplicationPresenter> {
     }
 
-    public interface MyView extends View {
+    public interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
     }
 
     /**
@@ -55,6 +55,8 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
                          final MyView view,
                          final MyProxy proxy) {
         super(eventBus, view, proxy, RevealType.Root);
+        
+        getView().setUiHandlers(this);
 
         // need to reset display because display is not reloaded every time (like conventional web site)
         eventBus.addHandler(NavigationEvent.getType(), new NavigationHandler() {
@@ -69,5 +71,11 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
                 });
             }
         });
+    }
+    
+    @Override
+    public void sendName(String name) {
+    	// TODO Auto-generated method stub
+    	
     }
 }

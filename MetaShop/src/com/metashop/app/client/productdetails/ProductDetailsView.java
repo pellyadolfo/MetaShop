@@ -23,9 +23,9 @@ package com.metashop.app.client.productdetails;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-public class ProductDetailsView extends ViewImpl implements ProductDetailsPresenter.MyView {
+public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandlers> implements ProductDetailsPresenter.MyView {
     interface Binder extends UiBinder<Widget, ProductDetailsView> {
     }
 
@@ -33,4 +33,9 @@ public class ProductDetailsView extends ViewImpl implements ProductDetailsPresen
     ProductDetailsView(final Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
+    
+    /*@UiHandler("closeButton")
+    void onClose(ClickEvent event) {
+        getUiHandlers().sendName("pp");
+    }*/
 }

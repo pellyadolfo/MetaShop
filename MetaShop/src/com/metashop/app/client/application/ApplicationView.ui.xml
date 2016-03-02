@@ -22,12 +22,8 @@
 
     <g:ScrollPanel>
 
-        
-            <!-- Optional Navbar -->
-
             <!-- Container Content -->
             <g:SimplePanel ui:field="contentContainer"/>
-
 
     </g:ScrollPanel>
 

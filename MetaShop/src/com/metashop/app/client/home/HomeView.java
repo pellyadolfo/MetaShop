@@ -1,5 +1,9 @@
 package com.metashop.app.client.home;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * #%L
  * GwtBootstrap3
@@ -21,16 +25,46 @@ package com.metashop.app.client.home;
  */
 
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.metashop.app.data.Category;
 
-public class HomeView extends ViewImpl implements HomePresenter.MyView {
+public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements HomePresenter.MyView {
     interface Binder extends UiBinder<Widget, HomeView> {
     }
 
     @Inject
     HomeView(final Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
+        
+        Logger logger = Logger.getLogger("NameOfYourLogger");
+        logger.log(Level.SEVERE, "this message should get logged");
+    }
+    
+    // ********************************************************************************************
+    // ****************************************** Slot ********************************************
+    // ********************************************************************************************
+    
+    @Override
+    public void addToSlot(final Object slot, final IsWidget content) {
+        if (slot == HomePresenter.TYPE_CATEGORY) {
+        	categories.add(content);
+        } else {
+            super.addToSlot(slot, content);
+        }
+    }
+    
+    @UiField
+    SimplePanel categories;
+    
+    @Override
+    public void setCategories(List<Category> categories) {
+    	// TODO Auto-generated method stub
+    	Logger rootLogger = Logger.getLogger("popo");
+		rootLogger.log(Level.SEVERE, "result: " + categories);
     }
 }

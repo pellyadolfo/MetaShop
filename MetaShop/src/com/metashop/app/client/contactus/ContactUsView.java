@@ -23,9 +23,9 @@ package com.metashop.app.client.contactus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-public class ContactUsView extends ViewImpl implements ContactUsPresenter.MyView {
+public class ContactUsView extends ViewWithUiHandlers<ContactUsUiHandlers> implements ContactUsPresenter.MyView {
     interface Binder extends UiBinder<Widget, ContactUsView> {
     }
 
@@ -33,4 +33,9 @@ public class ContactUsView extends ViewImpl implements ContactUsPresenter.MyView
     ContactUsView(final Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
+    
+    /*@UiHandler("closeButton")
+    void onClose(ClickEvent event) {
+        getUiHandlers().sendName("pp");
+    }*/
 }

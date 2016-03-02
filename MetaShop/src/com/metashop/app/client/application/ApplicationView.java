@@ -26,15 +26,12 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 /**
  * @author Joshua Godi
  */
-public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
-
-    @UiField
-    SimplePanel contentContainer;
+public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> implements ApplicationPresenter.MyView {
 
     interface Binder extends UiBinder<Widget, ApplicationView> {
     }
@@ -44,6 +41,12 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
         initWidget(binder.createAndBindUi(this));
     }
 
+    // ********************************************************************************************
+    // ****************************************** Slot ********************************************
+    // ********************************************************************************************
+    @UiField
+    SimplePanel contentContainer;
+    
     @Override
     public void setInSlot(final Object slot, final IsWidget content) {
         if (slot == ApplicationPresenter.TYPE_SetMainContent) {

@@ -18,20 +18,24 @@
   #L%
   -->
 <module rename-to="app">
+
     <inherits name="com.google.gwt.uibinder.UiBinder"/>
     <inherits name="com.google.gwt.inject.Inject"/>
-	<inherits name="com.arcbees.analytics.Analytics"/>
+    <inherits name='com.gwtplatform.dispatch.Dispatch'/>
+    <!-- inherits name="com.gwtplatform.dispatch.rpc.DispatchRpc"/-->﻿
     <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint'/>
+	<inherits name="com.arcbees.analytics.Analytics"/>
+	<inherits name="com.google.gwt.logging.Logging"/>
 
     <!-- For SDM -->
     <add-linker name="xsiframe"/>
     <set-configuration-property name="devModeRedirectEnabled" value="true"/>
+    <set-configuration-property name="gin.ginjector.modules" value="com.metashop.app.client.ClientModule"/>
 
     <!-- Specify the paths for translatable code -->
     <source path="client"/>
-
-    <!-- GWT Modules -->
-    <set-configuration-property name="gin.ginjector.modules" value="com.metashop.app.client.ClientModule"/>
+    <source path='data'/>
+    <source path='dispatch'/>
 
     <entry-point class="com.metashop.app.client.AppEntryPoint"/>
 

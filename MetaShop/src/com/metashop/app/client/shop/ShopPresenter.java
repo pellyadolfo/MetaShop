@@ -22,6 +22,7 @@ package com.metashop.app.client.shop;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -30,9 +31,9 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
 
-public class ShopPresenter extends Presenter<ShopPresenter.MyView, ShopPresenter.MyProxy> {
+public class ShopPresenter extends Presenter<ShopPresenter.MyView, ShopPresenter.MyProxy> implements ShopUiHandlers {
 
-    public interface MyView extends View {
+    public interface MyView extends View, HasUiHandlers<ShopUiHandlers> {
     }
 
     @NameToken(NameTokens.SHOP)
@@ -45,5 +46,13 @@ public class ShopPresenter extends Presenter<ShopPresenter.MyView, ShopPresenter
                           final MyView view,
                           final MyProxy proxy) {
         super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
+        
+        getView().setUiHandlers(this);
+    }
+    
+    @Override
+    public void sendName(String name) {
+    	// TODO Auto-generated method stub
+    	
     }
 }

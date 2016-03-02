@@ -23,9 +23,9 @@ package com.metashop.app.client.login;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-public class LoginView extends ViewImpl implements LoginPresenter.MyView {
+public class LoginView extends ViewWithUiHandlers<LoginUiHandlers> implements LoginPresenter.MyView {
     interface Binder extends UiBinder<Widget, LoginView> {
     }
 
@@ -33,4 +33,9 @@ public class LoginView extends ViewImpl implements LoginPresenter.MyView {
     LoginView(final Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
+    
+    /*@UiHandler("closeButton")
+    void onClose(ClickEvent event) {
+        getUiHandlers().sendName("pp");
+    }*/
 }

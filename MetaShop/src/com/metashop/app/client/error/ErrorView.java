@@ -23,9 +23,9 @@ package com.metashop.app.client.error;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-public class ErrorView extends ViewImpl implements ErrorPresenter.MyView {
+public class ErrorView extends ViewWithUiHandlers<ErrorUiHandlers> implements ErrorPresenter.MyView {
     interface Binder extends UiBinder<Widget, ErrorView> {
     }
 
@@ -33,4 +33,9 @@ public class ErrorView extends ViewImpl implements ErrorPresenter.MyView {
     ErrorView(final Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
+    
+    /*@UiHandler("closeButton")
+    void onClose(ClickEvent event) {
+        getUiHandlers().sendName("pp");
+    }*/
 }

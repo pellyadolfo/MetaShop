@@ -4,9 +4,16 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.tools.ant.taskdefs.Concat.TextElement;
+import org.gwtbootstrap3.client.ui.Anchor;
+import org.gwtbootstrap3.client.ui.Divider;
+import org.gwtbootstrap3.client.ui.Legend;
+import org.gwtbootstrap3.client.ui.html.Text;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.dom.client.UListElement;
 
@@ -32,8 +39,8 @@ import com.google.gwt.dom.client.UListElement;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.metashop.app.data.Brand;
@@ -50,19 +57,32 @@ public class CategoriesViewWidget extends Composite {
     public CategoriesViewWidget() {
         initWidget(binder.createAndBindUi(this));
     }
-
-	@UiField 
-	Label category;
 	
 	@UiField 
 	UListElement brands;
+	
+	@UiField 
+	Anchor anchor;
+	
+	@UiField
+	HTMLPanel subpanel;
+	
+	@UiField
+	Element cross;
 
     public CategoriesViewWidget setCategory(Category categoryVO) {
-    	category.setText(categoryVO.getName());
     	
+    	// text
+    	anchor.add(new Text(categoryVO.getName()));    	
+    	
+    	// collapsible effect
+    	anchor.setHref("#" + categoryVO.getName().toLowerCase());
+    	subpanel.getElement().setId(categoryVO.getName().toLowerCase());
+    	
+    	// brands
     	brands.removeAllChildren();
     	List<Brand> brandsVO = categoryVO.getBrands();
-    	for (Brand brand : brandsVO) {
+    	for (Brand brand : brandsVO) {    		
 	    	LIElement li = Document.get().createLIElement();
 	    	AnchorElement anchor = Document.get().createAnchorElement();
 	    	anchor.setHref("#");
@@ -70,6 +90,10 @@ public class CategoriesViewWidget extends Composite {
 	    	li.appendChild(anchor);
 	    	brands.appendChild(li);
     	}
+    	
+    	// cross
+    	if(brandsVO.size() == 0)
+    		cross.removeFromParent();
     	
     	return this;
     }

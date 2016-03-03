@@ -1,0 +1,40 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<g:HTMLPanel>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+						<span class="badge pull-right">
+							<i class="fa fa-plus"></i>
+						</span>
+						<g:Label ui:field="category"></g:Label>
+					</a>
+				</h4>
+			</div>
+			<div id="sportswear" class="panel-collapse collapse">
+				<div class="panel-body">
+					<ul ui:field="brands">
+						<li>
+							<a href="#">Nike </a>
+						</li>
+						<li>
+							<a href="#">Under Armour </a>
+						</li>
+						<li>
+							<a href="#">Adidas </a>
+						</li>
+						<li>
+							<a href="#">Puma</a>
+						</li>
+						<li>
+							<a href="#">ASICS </a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</g:HTMLPanel>
+
+</ui:UiBinder>

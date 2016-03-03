@@ -29,7 +29,6 @@ import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
-import com.metashop.app.dispatch.FieldVerifier;
 import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetCategoriesResult;
 

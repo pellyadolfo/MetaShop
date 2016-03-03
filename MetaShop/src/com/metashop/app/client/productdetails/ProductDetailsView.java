@@ -1,5 +1,7 @@
 package com.metashop.app.client.productdetails;
 
+import java.util.List;
+
 /*
  * #%L
  * GwtBootstrap3
@@ -21,9 +23,13 @@ package com.metashop.app.client.productdetails;
  */
 
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.metashop.app.client.widgets.CategoriesViewWidget;
+import com.metashop.app.data.Category;
 
 public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandlers> implements ProductDetailsPresenter.MyView {
     interface Binder extends UiBinder<Widget, ProductDetailsView> {
@@ -34,8 +40,16 @@ public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandl
         initWidget(uiBinder.createAndBindUi(this));
     }
     
-    /*@UiHandler("closeButton")
-    void onClose(ClickEvent event) {
-        getUiHandlers().sendName("pp");
-    }*/
+    // ********************************************************************************************
+    // ************************************** Categories ******************************************
+    // ********************************************************************************************
+    
+    @UiField
+    FlowPanel categoriesPanel;
+    
+    @Override
+    public void setCategories(List<Category> categories) {
+		for (int i = 0; i < categories.size(); i++)
+			categoriesPanel.add(new CategoriesViewWidget().setCategory(categories.get(i)));
+    }
 }

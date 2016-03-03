@@ -1,9 +1,6 @@
 package com.metashop.app.client.home;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -77,13 +74,11 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         
         getView().setUiHandlers(this);
         
-        // preload categories
+        // preload data
         loadCategories();
         loadBrands(null);
         loadFeatured(null);
         loadRecommended(null);
-    	Logger rootLogger = Logger.getLogger("popo");
-		rootLogger.log(Level.SEVERE, "request: ");
     }
     
     public void loadCategories() {
@@ -95,17 +90,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 	
 	        @Override
 	        public void onSuccess(GetCategoriesResult result) {
-	        	//getView().setCategories(getCategories());
-	        	
-	        	/* Create Root Logger */
-	        	Logger rootLogger = Logger.getLogger("popo");
-        		rootLogger.log(Level.SEVERE, "result: ");
-
-	        	Iterator<Category> iterator = result.getCategories().iterator();
-	        	while (iterator.hasNext()) {
-	        		rootLogger.log(Level.SEVERE, "result: " + iterator.next().getName());
-	        	}
-	        	
 	        	getView().setCategories(result.getCategories());
 	        }
 	    });

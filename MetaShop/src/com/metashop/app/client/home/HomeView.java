@@ -1,8 +1,6 @@
 package com.metashop.app.client.home;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * #%L
@@ -28,11 +26,10 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.metashop.app.client.home.categories.CategoriesViewWidget;
+import com.metashop.app.client.widgets.CategoriesViewWidget;
 import com.metashop.app.data.Category;
 
 public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements HomePresenter.MyView {
@@ -42,9 +39,6 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Inject
     HomeView(final Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
-        
-        Logger logger = Logger.getLogger("NameOfYourLogger");
-        logger.log(Level.SEVERE, "this message should get logged");
     }
     
     // ********************************************************************************************
@@ -60,16 +54,15 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
         }
     }
     
+    // ********************************************************************************************
+    // ************************************** Categories ******************************************
+    // ********************************************************************************************
+    
     @UiField
     FlowPanel categoriesPanel;
     
     @Override
     public void setCategories(List<Category> categories) {
-    	// TODO Auto-generated method stub
-    	Logger rootLogger = Logger.getLogger("popo");
-		rootLogger.log(Level.SEVERE, "result: " + categories);
-		rootLogger.log(Level.SEVERE, "categories.size: " + categories.size());
-
 		for (int i = 0; i < categories.size(); i++)
 			categoriesPanel.add(new CategoriesViewWidget().setCategory(categories.get(i)));
     }

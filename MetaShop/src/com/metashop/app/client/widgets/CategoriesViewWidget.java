@@ -1,13 +1,8 @@
-package com.metashop.app.client.home.categories;
+package com.metashop.app.client.widgets;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import org.apache.tools.ant.taskdefs.Concat.TextElement;
 import org.gwtbootstrap3.client.ui.Anchor;
-import org.gwtbootstrap3.client.ui.Divider;
-import org.gwtbootstrap3.client.ui.Legend;
 import org.gwtbootstrap3.client.ui.html.Text;
 
 import com.google.gwt.core.client.GWT;
@@ -41,7 +36,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;

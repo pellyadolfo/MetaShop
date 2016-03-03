@@ -20,8 +20,6 @@ import com.metashop.app.client.error.ErrorPresenter;
 import com.metashop.app.client.error.ErrorView;
 import com.metashop.app.client.home.HomePresenter;
 import com.metashop.app.client.home.HomeView;
-import com.metashop.app.client.home.categories.CategoriesPresenter;
-import com.metashop.app.client.home.categories.CategoriesView;
 import com.metashop.app.client.login.LoginPresenter;
 import com.metashop.app.client.login.LoginView;
 import com.metashop.app.client.productdetails.ProductDetailsPresenter;
@@ -40,7 +38,6 @@ public class ApplicationModule extends AbstractPresenterModule {
 
         // Main Application View
         bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class, ApplicationPresenter.MyProxy.class);
-        bindPresenter(CategoriesPresenter.class, CategoriesPresenter.MyView.class, CategoriesView.class, CategoriesPresenter.MyProxy.class);
 
         // eshoping
         bindPresenter(BlogPresenter.class, BlogPresenter.MyView.class, BlogView.class, BlogPresenter.MyProxy.class);

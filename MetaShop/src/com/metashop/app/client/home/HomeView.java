@@ -26,11 +26,13 @@ import java.util.logging.Logger;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.metashop.app.client.home.categories.CategoriesViewWidget;
 import com.metashop.app.data.Category;
 
 public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements HomePresenter.MyView {
@@ -52,19 +54,23 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Override
     public void addToSlot(final Object slot, final IsWidget content) {
         if (slot == HomePresenter.TYPE_CATEGORY) {
-        	categories.add(content);
+        	categoriesPanel.add(content);
         } else {
             super.addToSlot(slot, content);
         }
     }
     
     @UiField
-    SimplePanel categories;
+    FlowPanel categoriesPanel;
     
     @Override
     public void setCategories(List<Category> categories) {
     	// TODO Auto-generated method stub
     	Logger rootLogger = Logger.getLogger("popo");
 		rootLogger.log(Level.SEVERE, "result: " + categories);
+		rootLogger.log(Level.SEVERE, "categories.size: " + categories.size());
+
+		for (int i = 0; i < categories.size(); i++)
+			categoriesPanel.add(new CategoriesViewWidget().setCategory(categories.get(i)));
     }
 }

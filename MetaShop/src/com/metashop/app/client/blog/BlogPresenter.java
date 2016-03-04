@@ -36,7 +36,10 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
+import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
+import com.metashop.app.dispatch.GetBrandsRequest;
+import com.metashop.app.dispatch.GetBrandsResult;
 import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetCategoriesResult;
 
@@ -48,6 +51,7 @@ public class BlogPresenter extends Presenter<BlogPresenter.MyView, BlogPresenter
     
     public interface MyView extends View, HasUiHandlers<BlogUiHandlers> {
     	void setCategories(List<Category> categories);
+    	void setBrands(List<Brand> brads);
     }
     
     private final DispatchAsync dispatcher;
@@ -68,6 +72,7 @@ public class BlogPresenter extends Presenter<BlogPresenter.MyView, BlogPresenter
 
         // preload data
         loadCategories();
+        loadBrands();
     }
     
     public void loadCategories() {
@@ -84,6 +89,19 @@ public class BlogPresenter extends Presenter<BlogPresenter.MyView, BlogPresenter
 	    });
     }
     
+    public void loadBrands() {
+        dispatcher.execute(new GetBrandsRequest("textToServer"), new AsyncCallback<GetBrandsResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                //getView().setServerResponse("An error occurred: " + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetBrandsResult result) {
+	        	getView().setBrands(result.getBrands());
+            }
+        });
+    }
     @Override
     public void sendName(String name) {
     	// TODO Auto-generated method stub

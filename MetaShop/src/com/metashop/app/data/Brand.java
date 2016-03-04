@@ -14,4 +14,15 @@ public class Brand implements Serializable {
 		this.name = name;
 		return this;
 	}
+	
+	int count;
+	
+	public int getCount() {
+		return count;
+	}
+
+	public Brand setCount(int count) {
+		this.count = count;
+		return this;
+	}
 }

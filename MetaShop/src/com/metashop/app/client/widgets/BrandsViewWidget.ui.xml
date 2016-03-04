@@ -1,0 +1,12 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:w='urn:import:com.metashop.app.client.widgets'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<!-- dummy element since li cannot be top -->
+	<g:HTMLPanel>
+	
+		<li><a ui:field="anchor" href="#"><span class="pull-right"><!-- (50) --></span><!-- Acne --></a></li>
+	
+	</g:HTMLPanel>
+
+</ui:UiBinder>

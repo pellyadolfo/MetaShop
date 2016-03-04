@@ -17,7 +17,9 @@
 package com.metashop.app.dispatch.rpc.guice;
 
 import com.gwtplatform.dispatch.rpc.server.guice.HandlerModule;
+import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetCategoriesRequest;
+import com.metashop.app.server.GetBrandsHandler;
 import com.metashop.app.server.GetCategoriesHandler;
 
 /**
@@ -27,5 +29,6 @@ public class ServerModule extends HandlerModule {
     @Override
     protected void configureHandlers() {
         bindHandler(GetCategoriesRequest.class, GetCategoriesHandler.class);
+        bindHandler(GetBrandsRequest.class, GetBrandsHandler.class);
     }
 }

@@ -112,8 +112,8 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Override
     public void setRecommended(List<Product> recommended) {
 		for (int i = 0; i < recommended.size(); i++)
-			divrecommended1.appendChild(new ProductViewWidget().setRecommended(recommended.get(i)).getElement());
+			divrecommended1.appendChild(new ProductViewWidget().setRecommended(recommended.get(i), 4).getElement());
 		for (int i = 0; i < recommended.size(); i++)
-			divrecommended2.appendChild(new ProductViewWidget().setRecommended(recommended.get(i)).getElement());
+			divrecommended2.appendChild(new ProductViewWidget().setRecommended(recommended.get(i), 4).getElement());
     }
 }

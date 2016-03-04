@@ -55,9 +55,9 @@ public class ProductViewWidget extends Composite {
     @UiField
     ImageElement image;
     
-    public ProductViewWidget setRecommended(Product productVO) {
+    public ProductViewWidget setRecommended(Product productVO, int slotsOf12) {
     	
-    	productcell.setStyleName("col-sm-4");
+    	productcell.setStyleName("col-sm-" + slotsOf12);
     	name.setInnerText(productVO.getName());
     	price.setInnerText(productVO.getPrice() + productVO.getCurrency());
     	image.setSrc(productVO.getUrl());

@@ -35,6 +35,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.metashop.app.client.widgets.BrandsViewWidget;
 import com.metashop.app.client.widgets.CategoriesViewWidget;
 import com.metashop.app.client.widgets.FeaturedViewWidget;
+import com.metashop.app.client.widgets.RecommendedViewWidget;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 import com.metashop.app.data.Product;
@@ -88,16 +89,31 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     }
     
     // ********************************************************************************************
-    // **************************************** Featured ********************************************
+    // **************************************** Featured ******************************************
     // ********************************************************************************************
     
     @UiField
-    //FlowPanel featuredPanel;
     DivElement div;
     
     @Override
     public void setFeatureds(List<Product> featureds) {    	
 		for (int i = 0; i < featureds.size(); i++)
 			div.appendChild(new FeaturedViewWidget().setFeatured(featureds.get(i)).getElement());
+    }
+    
+    // ********************************************************************************************
+    // ************************************* Recommended ******************************************
+    // ********************************************************************************************
+    
+    @UiField
+    DivElement divrecommended1;
+    DivElement divrecommended2;
+    
+    @Override
+    public void setRecommended(List<Product> recommended) {
+		for (int i = 0; i < recommended.size(); i++)
+			divrecommended1.appendChild(new RecommendedViewWidget().setRecommended(recommended.get(i)).getElement());
+		for (int i = 0; i < recommended.size(); i++)
+			divrecommended2.appendChild(new RecommendedViewWidget().setRecommended(recommended.get(i)).getElement());
     }
 }

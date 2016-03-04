@@ -46,6 +46,8 @@ import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetCategoriesResult;
 import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetFeaturedResult;
+import com.metashop.app.dispatch.GetRecommendedRequest;
+import com.metashop.app.dispatch.GetRecommendedResult;
 
 public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> implements HomeUiHandlers {
     @ProxyStandard
@@ -57,6 +59,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     	void setCategories(List<Category> categories);
     	void setBrands(List<Brand> brads);
     	void setFeatureds(List<Product> featureds);
+    	void setRecommended(List<Product> recommended);
     }
     
     /**
@@ -86,7 +89,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         loadCategories();
         loadBrands();
         loadFeatured();
-        loadRecommended(null);        
+        loadRecommended();        
     }
     
     public void loadCategories() {
@@ -131,16 +134,16 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         });
     }
     
-    public void loadRecommended(String name) {
-        dispatcher.execute(new GetCategoriesRequest("textToServer"), new AsyncCallback<GetCategoriesResult>() {
+    public void loadRecommended() {
+        dispatcher.execute(new GetRecommendedRequest("textToServer"), new AsyncCallback<GetRecommendedResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 //getView().setServerResponse("An error occurred: " + caught.getMessage());
             }
 
             @Override
-            public void onSuccess(GetCategoriesResult result) {
-            	//getView().setCategories(getCategories());
+            public void onSuccess(GetRecommendedResult result) {
+            	getView().setRecommended(result.getProducts());
             }
         });
     }

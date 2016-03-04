@@ -20,9 +20,11 @@ import com.gwtplatform.dispatch.rpc.server.guice.HandlerModule;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetFeaturedRequest;
+import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.server.GetBrandsHandler;
 import com.metashop.app.server.GetCategoriesHandler;
 import com.metashop.app.server.GetFeaturedHandler;
+import com.metashop.app.server.GetRecommendedHandler;
 
 /**
  * Module which binds the handlers and configurations. Here is GIN in action, in the XXXModules
@@ -33,5 +35,6 @@ public class ServerModule extends HandlerModule {
         bindHandler(GetCategoriesRequest.class, GetCategoriesHandler.class);
         bindHandler(GetBrandsRequest.class, GetBrandsHandler.class);
         bindHandler(GetFeaturedRequest.class, GetFeaturedHandler.class);
+        bindHandler(GetRecommendedRequest.class, GetRecommendedHandler.class);
     }
 }

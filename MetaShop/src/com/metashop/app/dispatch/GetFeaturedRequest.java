@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,9 +14,25 @@
  * the License.
  */
 
-package com.metashop.app.client.home;
+package com.metashop.app.dispatch;
 
-import com.gwtplatform.mvp.client.UiHandlers;
+import com.gwtplatform.dispatch.rpc.shared.UnsecuredActionImpl;
 
-public interface HomeUiHandlers extends UiHandlers {
+public class GetFeaturedRequest extends UnsecuredActionImpl<GetFeaturedResult> {
+    private String textToServer;
+
+    public GetFeaturedRequest(String textToServer) {
+        this.textToServer = textToServer;
+    }
+
+    /**
+     * For serialization only.
+     */
+    @SuppressWarnings("unused")
+    private GetFeaturedRequest() {
+    }
+
+    public String getTextToServer() {
+        return textToServer;
+    }
 }

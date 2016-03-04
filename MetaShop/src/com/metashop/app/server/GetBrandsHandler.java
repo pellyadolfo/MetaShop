@@ -28,11 +28,8 @@ import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.Brand;
-import com.metashop.app.data.Category;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
-import com.metashop.app.dispatch.GetCategoriesRequest;
-import com.metashop.app.dispatch.GetCategoriesResult;
 
 public class GetBrandsHandler implements ActionHandler<GetBrandsRequest, GetBrandsResult> {
     private Provider<HttpServletRequest> requestProvider;

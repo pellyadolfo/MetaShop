@@ -38,10 +38,13 @@ import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
+import com.metashop.app.data.Product;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
 import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetCategoriesResult;
+import com.metashop.app.dispatch.GetRecommendedRequest;
+import com.metashop.app.dispatch.GetRecommendedResult;
 
 public class ProductDetailsPresenter extends Presenter<ProductDetailsPresenter.MyView, ProductDetailsPresenter.MyProxy> implements ProductDetailsUiHandlers {
     @ProxyCodeSplit	
@@ -52,6 +55,7 @@ public class ProductDetailsPresenter extends Presenter<ProductDetailsPresenter.M
     public interface MyView extends View, HasUiHandlers<ProductDetailsUiHandlers> {
     	void setCategories(List<Category> categories);
     	void setBrands(List<Brand> brads);
+    	void setRecommended(List<Product> recommended);
     }
     
     private final DispatchAsync dispatcher;
@@ -72,6 +76,7 @@ public class ProductDetailsPresenter extends Presenter<ProductDetailsPresenter.M
         
         loadCategories();
         loadBrands();
+        loadRecommended();
     }
     
     public void loadCategories() {
@@ -98,6 +103,20 @@ public class ProductDetailsPresenter extends Presenter<ProductDetailsPresenter.M
             @Override
             public void onSuccess(GetBrandsResult result) {
 	        	getView().setBrands(result.getBrands());
+            }
+        });
+    }
+    
+    public void loadRecommended() {
+        dispatcher.execute(new GetRecommendedRequest("textToServer"), new AsyncCallback<GetRecommendedResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                //getView().setServerResponse("An error occurred: " + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetRecommendedResult result) {
+            	getView().setRecommended(result.getProducts());
             }
         });
     }

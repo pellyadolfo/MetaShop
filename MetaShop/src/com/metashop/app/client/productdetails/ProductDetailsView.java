@@ -2,6 +2,7 @@ package com.metashop.app.client.productdetails;
 
 import java.util.List;
 
+import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.UListElement;
 
 /*
@@ -32,8 +33,10 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.metashop.app.client.widgets.BrandsViewWidget;
 import com.metashop.app.client.widgets.CategoriesViewWidget;
+import com.metashop.app.client.widgets.RecommendedViewWidget;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
+import com.metashop.app.data.Product;
 
 public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandlers> implements ProductDetailsPresenter.MyView {
     interface Binder extends UiBinder<Widget, ProductDetailsView> {
@@ -68,5 +71,21 @@ public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandl
     public void setBrands(List<Brand> brands) {    	
 		for (int i = 0; i < brands.size(); i++)
 			ul.appendChild(new BrandsViewWidget().setBrand(brands.get(i)).getElement().getChild(0));
+    }
+    
+    // ********************************************************************************************
+    // ************************************* Recommended ******************************************
+    // ********************************************************************************************
+    
+    @UiField
+    DivElement divrecommended1;
+    DivElement divrecommended2;
+    
+    @Override
+    public void setRecommended(List<Product> recommended) {
+		for (int i = 0; i < recommended.size(); i++)
+			divrecommended1.appendChild(new RecommendedViewWidget().setRecommended(recommended.get(i)).getElement());
+		for (int i = 0; i < recommended.size(); i++)
+			divrecommended2.appendChild(new RecommendedViewWidget().setRecommended(recommended.get(i)).getElement());
     }
 }

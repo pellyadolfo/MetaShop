@@ -19,7 +19,7 @@ package com.metashop.app.dispatch;
 import com.gwtplatform.dispatch.rpc.shared.UnsecuredActionImpl;
 
 public class GetFeaturedRequest extends UnsecuredActionImpl<GetFeaturedResult> {
-    private String textToServer;
+	private String textToServer;
 
     public GetFeaturedRequest(String textToServer) {
         this.textToServer = textToServer;
@@ -31,8 +31,8 @@ public class GetFeaturedRequest extends UnsecuredActionImpl<GetFeaturedResult> {
     @SuppressWarnings("unused")
     private GetFeaturedRequest() {
     }
-
+    
     public String getTextToServer() {
-        return textToServer;
+    	return textToServer;
     }
 }

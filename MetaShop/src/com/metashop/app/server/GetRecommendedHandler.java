@@ -30,8 +30,6 @@ import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.Product;
-import com.metashop.app.dispatch.GetFeaturedRequest;
-import com.metashop.app.dispatch.GetFeaturedResult;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetRecommendedResult;
 

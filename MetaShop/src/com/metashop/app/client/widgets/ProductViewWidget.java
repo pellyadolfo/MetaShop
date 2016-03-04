@@ -28,20 +28,24 @@ import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.metashop.app.data.Product;
 
-public class RecommendedViewWidget extends Composite {
+public class ProductViewWidget extends Composite {
 	
-    interface Binder extends UiBinder<Widget, RecommendedViewWidget> {
+    interface Binder extends UiBinder<Widget, ProductViewWidget> {
     }
     
     private static Binder binder = GWT.create(Binder.class);
 
-    public RecommendedViewWidget() {
+    public ProductViewWidget() {
         initWidget(binder.createAndBindUi(this));
     }
 
+    @UiField
+    HTMLPanel productcell;
+    
     @UiField
     ParagraphElement name;
     
@@ -51,8 +55,9 @@ public class RecommendedViewWidget extends Composite {
     @UiField
     ImageElement image;
     
-    public RecommendedViewWidget setRecommended(Product productVO) {
+    public ProductViewWidget setRecommended(Product productVO) {
     	
+    	productcell.setStyleName("col-sm-4");
     	name.setInnerText(productVO.getName());
     	price.setInnerText(productVO.getPrice() + productVO.getCurrency());
     	image.setSrc(productVO.getUrl());

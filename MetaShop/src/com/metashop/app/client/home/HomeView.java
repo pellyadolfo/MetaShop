@@ -35,7 +35,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.metashop.app.client.widgets.BrandsViewWidget;
 import com.metashop.app.client.widgets.CategoriesViewWidget;
 import com.metashop.app.client.widgets.FeaturedViewWidget;
-import com.metashop.app.client.widgets.RecommendedViewWidget;
+import com.metashop.app.client.widgets.ProductViewWidget;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 import com.metashop.app.data.Product;
@@ -112,8 +112,8 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Override
     public void setRecommended(List<Product> recommended) {
 		for (int i = 0; i < recommended.size(); i++)
-			divrecommended1.appendChild(new RecommendedViewWidget().setRecommended(recommended.get(i)).getElement());
+			divrecommended1.appendChild(new ProductViewWidget().setRecommended(recommended.get(i)).getElement());
 		for (int i = 0; i < recommended.size(); i++)
-			divrecommended2.appendChild(new RecommendedViewWidget().setRecommended(recommended.get(i)).getElement());
+			divrecommended2.appendChild(new ProductViewWidget().setRecommended(recommended.get(i)).getElement());
     }
 }

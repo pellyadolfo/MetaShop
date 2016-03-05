@@ -16,7 +16,6 @@
 
 package com.metashop.app.middleware;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -30,6 +29,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.Brand;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
+import com.metashop.app.server.dao.HardcodedDao;
 
 public class GetBrandsHandler implements ActionHandler<GetBrandsRequest, GetBrandsResult> {
     private Provider<HttpServletRequest> requestProvider;
@@ -43,17 +43,8 @@ public class GetBrandsHandler implements ActionHandler<GetBrandsRequest, GetBran
 
     @Override
     public GetBrandsResult execute(GetBrandsRequest action, ExecutionContext context) throws ActionException {
-        String input = action.getTextToServer();
-
-        // add categories
-        List<Brand> brands = new ArrayList<Brand>();
-        brands.add(new Brand().setName("Acne").setCount(50));
-        brands.add(new Brand().setName("Grune Erde").setCount(56));   
-        brands.add(new Brand().setName("Albiro").setCount(27));
-        brands.add(new Brand().setName("Ronhill").setCount(32));
-        brands.add(new Brand().setName("Oddmolly").setCount(5));
-        brands.add(new Brand().setName("Boudestijn").setCount(9));
-        brands.add(new Brand().setName("Rosch Creative Culture").setCount(4));
+        // fetch brands
+        List<Brand> brands = new HardcodedDao().getBrands(action);
         GetBrandsResult result = new GetBrandsResult(brands);
 
         return result;

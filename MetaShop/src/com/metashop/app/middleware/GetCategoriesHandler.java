@@ -16,7 +16,6 @@
 
 package com.metashop.app.middleware;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -27,10 +26,10 @@ import com.google.inject.Provider;
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
-import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetCategoriesResult;
+import com.metashop.app.server.dao.HardcodedDao;
 
 public class GetCategoriesHandler implements ActionHandler<GetCategoriesRequest, GetCategoriesResult> {
     private Provider<HttpServletRequest> requestProvider;
@@ -44,20 +43,8 @@ public class GetCategoriesHandler implements ActionHandler<GetCategoriesRequest,
 
     @Override
     public GetCategoriesResult execute(GetCategoriesRequest action, ExecutionContext context) throws ActionException {
-        String input = action.getTextToServer();
-
-        // add categories
-        List<Category> categories = new ArrayList<Category>();
-        categories.add(new Category().setName("Sportswear").addBrand(new Brand().setName("Nike")).addBrand(new Brand().setName("Nike")).addBrand(new Brand().setName("Under Armour")).addBrand(new Brand().setName("Adidas")).addBrand(new Brand().setName("Puma")).addBrand(new Brand().setName("ASICS")));
-        categories.add(new Category().setName("Mens").addBrand(new Brand().setName("Fendi")).addBrand(new Brand().setName("Guess")).addBrand(new Brand().setName("Valentino")).addBrand(new Brand().setName("Dior")).addBrand(new Brand().setName("Versace")).addBrand(new Brand().setName("Armani")).addBrand(new Brand().setName("Prada")).addBrand(new Brand().setName("Dolce and Gabbana")).addBrand(new Brand().setName("Chanel")).addBrand(new Brand().setName("Gucci")));
-        categories.add(new Category().setName("Womens").addBrand(new Brand().setName("Fendi")).addBrand(new Brand().setName("Guess")).addBrand(new Brand().setName("Valentino")).addBrand(new Brand().setName("Dior")).addBrand(new Brand().setName("Versace")));
-        categories.add(new Category().setName("Kids "));
-        categories.add(new Category().setName("Fashion"));        
-        categories.add(new Category().setName("Households"));        
-        categories.add(new Category().setName("Interiors"));        
-        categories.add(new Category().setName("Clothing"));        
-        categories.add(new Category().setName("Bags"));        
-        categories.add(new Category().setName("Shoes"));        
+        // fetch categories
+        List<Category> categories = new HardcodedDao().getCategories(action);
         GetCategoriesResult result = new GetCategoriesResult(categories);
 
         return result;

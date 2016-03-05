@@ -32,6 +32,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.Product;
 import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetFeaturedResult;
+import com.metashop.app.server.dao.HardcodedDao;
 
 public class GetFeaturedHandler implements ActionHandler<GetFeaturedRequest, GetFeaturedResult> {
     private Provider<HttpServletRequest> requestProvider;
@@ -45,35 +46,7 @@ public class GetFeaturedHandler implements ActionHandler<GetFeaturedRequest, Get
 
     @Override
     public GetFeaturedResult execute(GetFeaturedRequest action, ExecutionContext context) throws ActionException {
-        Logger logger = Logger.getLogger("clase");
-        logger.log(Level.SEVERE, "count: " + action.getTextToServer());
-        System.out.println("count: " + action.getTextToServer());
-    	
-        List<Product> featured = new ArrayList<Product>();
-    	if (action.getTextToServer().equals("6")) {
-	        // add categories
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product1.jpg"));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product2.jpg"));   
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product3.jpg"));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product4.jpg").setNew(true));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product5.jpg").setSale(true));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product6.jpg"));
-    	} else {
-	        // add categories
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/shop/product12.jpg"));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/shop/product11.jpg"));   
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/shop/product10.jpg"));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/shop/product9.jpg").setNew(true));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/shop/product8.jpg").setSale(true));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/shop/product7.jpg"));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product6.jpg"));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product5.jpg"));   
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product4.jpg"));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product3.jpg"));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product2.jpg"));
-	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product1.jpg"));
-    	}
-
+        List<Product> featured = new HardcodedDao().getFeatured(action);
         GetFeaturedResult result = new GetFeaturedResult(featured);
         return result;
     }

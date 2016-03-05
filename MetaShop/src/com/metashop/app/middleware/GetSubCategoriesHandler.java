@@ -16,7 +16,6 @@
 
 package com.metashop.app.middleware;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -27,16 +26,15 @@ import com.google.inject.Provider;
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
-import com.metashop.app.data.Brand;
-import com.metashop.app.data.Product;
 import com.metashop.app.data.SubCategory;
 import com.metashop.app.dispatch.GetSubCategoriesRequest;
 import com.metashop.app.dispatch.GetSubCategoriesResult;
+import com.metashop.app.server.dao.HardcodedDao;
 
 public class GetSubCategoriesHandler implements ActionHandler<GetSubCategoriesRequest, GetSubCategoriesResult> {
     private Provider<HttpServletRequest> requestProvider;
     private ServletContext servletContext;
-
+    
     @Inject
     GetSubCategoriesHandler(ServletContext servletContext, Provider<HttpServletRequest> requestProvider) {
         this.servletContext = servletContext;
@@ -47,37 +45,7 @@ public class GetSubCategoriesHandler implements ActionHandler<GetSubCategoriesRe
     public GetSubCategoriesResult execute(GetSubCategoriesRequest action, ExecutionContext context) throws ActionException {
 
         // add categories
-        List<SubCategory> subCategories = new ArrayList<SubCategory>();
-        subCategories.add(new SubCategory().setName("T-shirt")
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery1.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery2.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery3.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery4.jpg"))
-        );
-        subCategories.add(new SubCategory().setName("Blazers")
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery4.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery3.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery2.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery1.jpg"))
-        );
-        subCategories.add(new SubCategory().setName("Sunglass")
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery3.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery4.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery1.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery2.jpg"))
-        );
-        subCategories.add(new SubCategory().setName("Kids")
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery1.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery2.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery3.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery4.jpg"))
-        );
-        subCategories.add(new SubCategory().setName("Polo Shirt")
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery2.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery4.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery3.jpg"))
-        		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery1.jpg"))
-        );
+        List<SubCategory> subCategories = new HardcodedDao().getSubCategories(action);
         GetSubCategoriesResult result = new GetSubCategoriesResult(subCategories);
 
         return result;

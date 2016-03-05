@@ -16,10 +16,7 @@
 
 package com.metashop.app.middleware;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +29,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.Product;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetRecommendedResult;
+import com.metashop.app.server.dao.HardcodedDao;
 
 public class GetRecommendedHandler implements ActionHandler<GetRecommendedRequest, GetRecommendedResult> {
     private Provider<HttpServletRequest> requestProvider;
@@ -45,15 +43,7 @@ public class GetRecommendedHandler implements ActionHandler<GetRecommendedReques
 
     @Override
     public GetRecommendedResult execute(GetRecommendedRequest action, ExecutionContext context) throws ActionException {
-        Logger logger = Logger.getLogger("clase");
-        logger.log(Level.SEVERE, "count: " + action.getTextToServer());
-        System.out.println("count: " + action.getTextToServer());
-    	
-        List<Product> recommended = new ArrayList<Product>();
- 		recommended.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/recommend1.jpg"));
- 		recommended.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/recommend2.jpg"));   
-    	recommended.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/recommend3.jpg"));
-   	
+        List<Product> recommended = new HardcodedDao().getRecommended(action);   	
     	GetRecommendedResult result = new GetRecommendedResult(recommended);
         return result;
     }

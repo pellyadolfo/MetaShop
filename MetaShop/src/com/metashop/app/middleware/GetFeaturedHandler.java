@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.metashop.app.server;
+package com.metashop.app.middleware;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -22,11 +22,11 @@ import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetSubCategoriesRequest;
-import com.metashop.app.server.GetBrandsHandler;
-import com.metashop.app.server.GetCategoriesHandler;
-import com.metashop.app.server.GetFeaturedHandler;
-import com.metashop.app.server.GetRecommendedHandler;
-import com.metashop.app.server.GetSubCategoriesHandler;
+import com.metashop.app.middleware.GetBrandsHandler;
+import com.metashop.app.middleware.GetCategoriesHandler;
+import com.metashop.app.middleware.GetFeaturedHandler;
+import com.metashop.app.middleware.GetRecommendedHandler;
+import com.metashop.app.middleware.GetSubCategoriesHandler;
 
 /**
  * Module which binds the handlers and configurations. Here is GIN in action, in the XXXModules

@@ -79,6 +79,8 @@ public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandl
     
     @UiField
     DivElement divrecommended1;
+    
+    @UiField
     DivElement divrecommended2;
     
     @Override

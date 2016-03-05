@@ -114,14 +114,16 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     
     @UiField
     DivElement divrecommended1;
+    
+    @UiField
     DivElement divrecommended2;
     
     @Override
     public void setRecommended(List<Product> recommended) {
-		for (int i = 0; i < recommended.size(); i++)
+		for (int i = 0; i < recommended.size(); i++) {
 			divrecommended1.appendChild(new ProductViewWidget().setRecommended(recommended.get(i), 4).getElement());
-		for (int i = 0; i < recommended.size(); i++)
 			divrecommended2.appendChild(new ProductViewWidget().setRecommended(recommended.get(i), 4).getElement());
+		}
     }
     
     // ********************************************************************************************

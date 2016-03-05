@@ -53,7 +53,7 @@ public class GetRecommendedHandler implements ActionHandler<GetRecommendedReques
  		recommended.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/recommend1.jpg"));
  		recommended.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/recommend2.jpg"));   
     	recommended.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/recommend3.jpg"));
-
+   	
     	GetRecommendedResult result = new GetRecommendedResult(recommended);
         return result;
     }

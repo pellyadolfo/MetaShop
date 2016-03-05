@@ -2,6 +2,12 @@ package com.metashop.app.client.home;
 
 import java.util.List;
 
+import org.gwtbootstrap3.client.ui.NavTabs;
+import org.gwtbootstrap3.client.ui.TabContent;
+import org.gwtbootstrap3.client.ui.TabListItem;
+import org.gwtbootstrap3.client.ui.TabPane;
+import org.gwtbootstrap3.client.ui.constants.Toggle;
+
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.UListElement;
 
@@ -39,6 +45,7 @@ import com.metashop.app.client.widgets.ProductViewWidget;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 import com.metashop.app.data.Product;
+import com.metashop.app.data.SubCategory;
 
 public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements HomePresenter.MyView {
     interface Binder extends UiBinder<Widget, HomeView> {
@@ -115,5 +122,38 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
 			divrecommended1.appendChild(new ProductViewWidget().setRecommended(recommended.get(i), 4).getElement());
 		for (int i = 0; i < recommended.size(); i++)
 			divrecommended2.appendChild(new ProductViewWidget().setRecommended(recommended.get(i), 4).getElement());
+    }
+    
+    // ********************************************************************************************
+    // ************************************ SubCategories *****************************************
+    // ********************************************************************************************
+    
+    @UiField 
+    NavTabs navs;
+    
+    @UiField
+    TabContent tabContent;
+    
+    @Override
+    public void setSubCategories(List<SubCategory> subcategories) {
+    	for(int i = 0; i < subcategories.size(); i++) {
+    		
+    		// tablistitem
+    		TabListItem tabListItem = new TabListItem();
+    		tabListItem.setText(subcategories.get(i).getName());
+    		tabListItem.setHref("#" + subcategories.get(i).getName().replace(" ", "").toLowerCase());
+    		tabListItem.setDataToggle(Toggle.TAB);
+    		navs.add(tabListItem);
+    		
+    		// add products below
+			TabPane tabPane = new TabPane();
+			tabPane.setFade(true);
+			tabPane.setActive(i == 0);
+			tabPane.setIn(i == 0);
+			tabPane.setId(subcategories.get(i).getName().replace(" ", "").toLowerCase());
+    		for (int j = 0; j < subcategories.get(i).getProduct().size(); j++)
+    			tabPane.add(new ProductViewWidget().setRecommended(subcategories.get(i).getProduct().get(j), 3));
+			tabContent.add(tabPane);
+    	}
     }
 }

@@ -40,6 +40,7 @@ import com.metashop.app.client.application.ApplicationPresenter;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 import com.metashop.app.data.Product;
+import com.metashop.app.data.SubCategory;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
 import com.metashop.app.dispatch.GetCategoriesRequest;
@@ -48,6 +49,8 @@ import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetFeaturedResult;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetRecommendedResult;
+import com.metashop.app.dispatch.GetSubCategoriesRequest;
+import com.metashop.app.dispatch.GetSubCategoriesResult;
 
 public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter.MyProxy> implements HomeUiHandlers {
     @ProxyStandard
@@ -60,6 +63,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     	void setBrands(List<Brand> brads);
     	void setFeatureds(List<Product> featureds);
     	void setRecommended(List<Product> recommended);
+    	void setSubCategories(List<SubCategory> subcategories);
     }
     
     /**
@@ -89,7 +93,8 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         loadCategories();
         loadBrands();
         loadFeatured();
-        loadRecommended();        
+        loadRecommended();
+        loadSubCategories();
     }
     
     public void loadCategories() {
@@ -146,5 +151,19 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             	getView().setRecommended(result.getProducts());
             }
         });
+    }
+    
+    public void loadSubCategories() {
+        dispatcher.execute(new GetSubCategoriesRequest("textToServer"), new AsyncCallback<GetSubCategoriesResult>() {
+	        @Override
+	        public void onFailure(Throwable caught) {
+	            //getView().setServerResponse("An error occurred: " + caught.getMessage());
+	        }
+	
+	        @Override
+	        public void onSuccess(GetSubCategoriesResult result) {
+	        	getView().setSubCategories(result.getSubCategories());
+	        }
+	    });
     }
 }

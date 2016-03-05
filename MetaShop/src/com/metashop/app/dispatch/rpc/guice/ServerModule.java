@@ -21,10 +21,12 @@ import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetRecommendedRequest;
+import com.metashop.app.dispatch.GetSubCategoriesRequest;
 import com.metashop.app.server.GetBrandsHandler;
 import com.metashop.app.server.GetCategoriesHandler;
 import com.metashop.app.server.GetFeaturedHandler;
 import com.metashop.app.server.GetRecommendedHandler;
+import com.metashop.app.server.GetSubCategoriesHandler;
 
 /**
  * Module which binds the handlers and configurations. Here is GIN in action, in the XXXModules
@@ -36,5 +38,6 @@ public class ServerModule extends HandlerModule {
         bindHandler(GetBrandsRequest.class, GetBrandsHandler.class);
         bindHandler(GetFeaturedRequest.class, GetFeaturedHandler.class);
         bindHandler(GetRecommendedRequest.class, GetRecommendedHandler.class);
+        bindHandler(GetSubCategoriesRequest.class, GetSubCategoriesHandler.class);
     }
 }

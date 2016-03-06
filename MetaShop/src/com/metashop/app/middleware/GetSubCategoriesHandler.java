@@ -29,9 +29,8 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.SubCategory;
 import com.metashop.app.dispatch.GetSubCategoriesRequest;
 import com.metashop.app.dispatch.GetSubCategoriesResult;
-import com.metashop.app.server.dao.HardcodedDao;
 
-public class GetSubCategoriesHandler implements ActionHandler<GetSubCategoriesRequest, GetSubCategoriesResult> {
+public class GetSubCategoriesHandler extends AHandler implements ActionHandler<GetSubCategoriesRequest, GetSubCategoriesResult> {
     private Provider<HttpServletRequest> requestProvider;
     private ServletContext servletContext;
     
@@ -45,7 +44,7 @@ public class GetSubCategoriesHandler implements ActionHandler<GetSubCategoriesRe
     public GetSubCategoriesResult execute(GetSubCategoriesRequest action, ExecutionContext context) throws ActionException {
 
         // add categories
-        List<SubCategory> subCategories = new HardcodedDao().getSubCategories(action);
+        List<SubCategory> subCategories = getDao().getSubCategories(action);
         GetSubCategoriesResult result = new GetSubCategoriesResult(subCategories);
 
         return result;

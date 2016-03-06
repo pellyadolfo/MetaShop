@@ -29,9 +29,8 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.Brand;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
-import com.metashop.app.server.dao.HardcodedDao;
 
-public class GetBrandsHandler implements ActionHandler<GetBrandsRequest, GetBrandsResult> {
+public class GetBrandsHandler extends AHandler implements ActionHandler<GetBrandsRequest, GetBrandsResult> {
     private Provider<HttpServletRequest> requestProvider;
     private ServletContext servletContext;
 
@@ -44,7 +43,7 @@ public class GetBrandsHandler implements ActionHandler<GetBrandsRequest, GetBran
     @Override
     public GetBrandsResult execute(GetBrandsRequest action, ExecutionContext context) throws ActionException {
         // fetch brands
-        List<Brand> brands = new HardcodedDao().getBrands(action);
+        List<Brand> brands = getDao().getBrands(action);
         GetBrandsResult result = new GetBrandsResult(brands);
 
         return result;

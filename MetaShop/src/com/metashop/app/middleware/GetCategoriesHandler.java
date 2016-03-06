@@ -29,9 +29,8 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.Category;
 import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetCategoriesResult;
-import com.metashop.app.server.dao.HardcodedDao;
 
-public class GetCategoriesHandler implements ActionHandler<GetCategoriesRequest, GetCategoriesResult> {
+public class GetCategoriesHandler extends AHandler implements ActionHandler<GetCategoriesRequest, GetCategoriesResult> {
     private Provider<HttpServletRequest> requestProvider;
     private ServletContext servletContext;
 
@@ -44,7 +43,7 @@ public class GetCategoriesHandler implements ActionHandler<GetCategoriesRequest,
     @Override
     public GetCategoriesResult execute(GetCategoriesRequest action, ExecutionContext context) throws ActionException {
         // fetch categories
-        List<Category> categories = new HardcodedDao().getCategories(action);
+        List<Category> categories = getDao().getCategories(action);
         GetCategoriesResult result = new GetCategoriesResult(categories);
 
         return result;

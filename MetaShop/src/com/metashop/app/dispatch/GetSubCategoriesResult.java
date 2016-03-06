@@ -19,7 +19,6 @@ package com.metashop.app.dispatch;
 import java.util.List;
 
 import com.gwtplatform.dispatch.rpc.shared.Result;
-import com.metashop.app.data.Category;
 import com.metashop.app.data.SubCategory;
 
 /**

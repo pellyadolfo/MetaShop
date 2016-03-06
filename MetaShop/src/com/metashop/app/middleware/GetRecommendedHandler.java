@@ -29,9 +29,8 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.Product;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetRecommendedResult;
-import com.metashop.app.server.dao.HardcodedDao;
 
-public class GetRecommendedHandler implements ActionHandler<GetRecommendedRequest, GetRecommendedResult> {
+public class GetRecommendedHandler extends AHandler implements ActionHandler<GetRecommendedRequest, GetRecommendedResult> {
     private Provider<HttpServletRequest> requestProvider;
     private ServletContext servletContext;
 
@@ -43,7 +42,7 @@ public class GetRecommendedHandler implements ActionHandler<GetRecommendedReques
 
     @Override
     public GetRecommendedResult execute(GetRecommendedRequest action, ExecutionContext context) throws ActionException {
-        List<Product> recommended = new HardcodedDao().getRecommended(action);   	
+        List<Product> recommended = getDao().getRecommended(action);   	
     	GetRecommendedResult result = new GetRecommendedResult(recommended);
         return result;
     }

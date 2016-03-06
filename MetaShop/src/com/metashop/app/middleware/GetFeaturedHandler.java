@@ -16,10 +16,7 @@
 
 package com.metashop.app.middleware;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -32,9 +29,8 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.metashop.app.data.Product;
 import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetFeaturedResult;
-import com.metashop.app.server.dao.HardcodedDao;
 
-public class GetFeaturedHandler implements ActionHandler<GetFeaturedRequest, GetFeaturedResult> {
+public class GetFeaturedHandler extends AHandler implements ActionHandler<GetFeaturedRequest, GetFeaturedResult> {
     private Provider<HttpServletRequest> requestProvider;
     private ServletContext servletContext;
 
@@ -46,7 +42,7 @@ public class GetFeaturedHandler implements ActionHandler<GetFeaturedRequest, Get
 
     @Override
     public GetFeaturedResult execute(GetFeaturedRequest action, ExecutionContext context) throws ActionException {
-        List<Product> featured = new HardcodedDao().getFeatured(action);
+        List<Product> featured = getDao().getFeatured(action);
         GetFeaturedResult result = new GetFeaturedResult(featured);
         return result;
     }

@@ -12,11 +12,11 @@ import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetSubCategoriesRequest;
-import com.metashop.app.server.IServicesFacade;
+import com.metashop.app.server.AServicesFacade;
 
-public class HardcodedDao implements IServicesFacade {
+public class HardcodedDao extends AServicesFacade {
 
-	public List<Brand> getBrands(GetBrandsRequest action) {
+	public List<Brand> getBrandsImpl(GetBrandsRequest action) {
         List<Brand> brands = new ArrayList<Brand>();
         brands.add(new Brand().setName("Acne").setCount(50));
         brands.add(new Brand().setName("Grune Erde").setCount(56));   
@@ -29,7 +29,7 @@ public class HardcodedDao implements IServicesFacade {
 	}
 	
 	@Override
-	public List<Category> getCategories(GetCategoriesRequest action) {
+	public List<Category> getCategoriesImpl(GetCategoriesRequest action) {
         List<Category> categories = new ArrayList<Category>();
         categories.add(new Category().setName("Sportswear").addBrand(new Brand().setName("Nike")).addBrand(new Brand().setName("Nike")).addBrand(new Brand().setName("Under Armour")).addBrand(new Brand().setName("Adidas")).addBrand(new Brand().setName("Puma")).addBrand(new Brand().setName("ASICS")));
         categories.add(new Category().setName("Mens").addBrand(new Brand().setName("Fendi")).addBrand(new Brand().setName("Guess")).addBrand(new Brand().setName("Valentino")).addBrand(new Brand().setName("Dior")).addBrand(new Brand().setName("Versace")).addBrand(new Brand().setName("Armani")).addBrand(new Brand().setName("Prada")).addBrand(new Brand().setName("Dolce and Gabbana")).addBrand(new Brand().setName("Chanel")).addBrand(new Brand().setName("Gucci")));
@@ -45,7 +45,7 @@ public class HardcodedDao implements IServicesFacade {
 	}
 	
 	@Override
-	public List<Product> getFeatured(GetFeaturedRequest action) {
+	public List<Product> getFeaturedImpl(GetFeaturedRequest action) {
         List<Product> featured = new ArrayList<Product>();
     	if (action.getTextToServer().equals("6")) {
 	        // add categories
@@ -74,7 +74,7 @@ public class HardcodedDao implements IServicesFacade {
 	}
 	
 	@Override
-	public List<Product> getRecommended(GetRecommendedRequest action) {
+	public List<Product> getRecommendedImpl(GetRecommendedRequest action) {
         List<Product> recommended = new ArrayList<Product>();
  		recommended.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/recommend1.jpg"));
  		recommended.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/recommend2.jpg"));   
@@ -83,7 +83,7 @@ public class HardcodedDao implements IServicesFacade {
 	}
 	
 	@Override
-	public List<SubCategory> getSubCategories(GetSubCategoriesRequest action) {
+	public List<SubCategory> getSubCategoriesImpl(GetSubCategoriesRequest action) {
         List<SubCategory> subCategories = new ArrayList<SubCategory>();
         subCategories.add(new SubCategory().setName("T-shirt")
         		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery1.jpg"))
@@ -116,5 +116,15 @@ public class HardcodedDao implements IServicesFacade {
         		.addProduct(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/gallery1.jpg"))
         );
 		return subCategories;
+	}
+	
+	// *************************************************************************************************
+	// Manage Connection
+	// *************************************************************************************************
+	@Override
+	protected void pre() {
+	}
+	@Override
+	protected void post() {
 	}
 }

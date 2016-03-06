@@ -14,6 +14,7 @@ import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetSubCategoriesRequest;
 import com.metashop.app.server.IServicesFacade;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -119,14 +120,19 @@ public class MongoDBDao implements IServicesFacade {
 		DB db = mongoClient.getDB( "comparephone" );
 		DBCollection collection = db.getCollection("product");
 		
-		BasicDBObject group = new BasicDBObject("$group", new BasicDBObject("_id", "$os.type").append("count", new BasicDBObject("$sum", 1)));
+		BasicDBObject group = new BasicDBObject("$group", new BasicDBObject("_id", "$os.type").append("docs", new BasicDBObject("$push", "$$ROOT")).append("count", new BasicDBObject("$sum", 1)));
 		BasicDBObject sort = new BasicDBObject("$sort", new BasicDBObject("count", -1));
 		BasicDBObject limit = new BasicDBObject("$limit", 5);
-		
+				
 	    Iterable<DBObject> output = collection.aggregate(Arrays.asList(group, sort, limit)).results();
 	    for (DBObject dbObject : output) {
-	        System.out.println(dbObject);
-			result.add(new SubCategory().setName("" + dbObject.get("_id")));
+	        SubCategory subCategory = new SubCategory().setName("" + dbObject.get("_id"));
+	        for (int i = 0; i < 4; i++) {
+	        	BasicDBObject item = (BasicDBObject) ((BasicDBList)dbObject.get("docs")).get(i);
+	        	BasicDBObject name = (BasicDBObject) item.get("name");
+	        	subCategory.addProduct(new Product().setName(name.get("id") + ""));
+	        }
+			result.add(subCategory);
 	    }
 
 	    mongoClient.close();

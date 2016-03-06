@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bson.Document;
+
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 import com.metashop.app.data.Product;
@@ -16,27 +18,28 @@ import com.metashop.app.dispatch.GetSubCategoriesRequest;
 import com.metashop.app.server.AServicesFacade;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.Block;
 
 public class MongoDBDao extends AServicesFacade {
 	
 	@Override
 	public List<Brand> getBrandsImpl(GetBrandsRequest action) {
 		// run query
-		DBCollection collection = getDatabase().getCollection("product");
 		BasicDBObject group = new BasicDBObject("$group", new BasicDBObject("_id", "$maker.name").append("count", new BasicDBObject("$sum", 1)));
 		BasicDBObject sort = new BasicDBObject("$sort", new BasicDBObject("count", -1));
 		BasicDBObject limit = new BasicDBObject("$limit", 7);
-	    Iterable<DBObject> output = collection.aggregate(Arrays.asList(group, sort, limit)).results();
+		AggregateIterable<Document> output = getCollection("product").aggregate(Arrays.asList(group, sort, limit));
 	    
 	    // create output
 	    final List<Brand> result = new ArrayList<Brand>();
-	    for (DBObject dbObject : output)
-			result.add(new Brand().setName("" + dbObject.get("_id")).setCount(Integer.parseInt(dbObject.get("count") + "")));
+	    for (Document document : output)
+			result.add(new Brand().setName("" + document.get("_id")).setCount(Integer.parseInt(document.get("count") + "")));
 
 		return result;
 	}
@@ -44,16 +47,15 @@ public class MongoDBDao extends AServicesFacade {
 	@Override
 	public List<Category> getCategoriesImpl(GetCategoriesRequest action) {
 		// run query
-		DBCollection collection = getDatabase().getCollection("product");
 		BasicDBObject group = new BasicDBObject("$group", new BasicDBObject("_id", "$os.ver").append("count", new BasicDBObject("$sum", 1)));
 		BasicDBObject sort = new BasicDBObject("$sort", new BasicDBObject("count", -1));
 		BasicDBObject limit = new BasicDBObject("$limit", 10);		
-	    Iterable<DBObject> output = collection.aggregate(Arrays.asList(group, sort, limit)).results();
+		AggregateIterable<Document> output = getCollection("product").aggregate(Arrays.asList(group, sort, limit));
 	    
 	    // create output
 		final List<Category> result = new ArrayList<Category>();
-	    for (DBObject dbObject : output)
-			result.add(new Category().setName("Android " + dbObject.get("_id") + " (" + dbObject.get("count") + ")"));
+	    for (Document document : output)
+			result.add(new Category().setName("Android " + document.get("_id") + " (" + document.get("count") + ")"));
 
 		return result;
 	}
@@ -61,16 +63,17 @@ public class MongoDBDao extends AServicesFacade {
 	@Override
 	public List<Product> getFeaturedImpl(GetFeaturedRequest action) {
 		// run query
-		DBCollection collection = getDatabase().getCollection("product");
-		DBCursor cursor = collection.find().limit(6);
+		FindIterable<Document> iterable = getCollection("product").find().limit(6);
 		
 		// create output
-		List<Product> products = new ArrayList<Product>();
-		while (cursor.hasNext()) {
-			DBObject record = cursor.next();
-			String name = (String) ((DBObject) record.get("name")).get("id");			
-			products.add(new Product().setName(name).setPrice(56).setCurrency("$").setUrl("images/photo/" + name.replace(" ", "_") +  ".jpg"));
-		}
+		final List<Product> products = new ArrayList<Product>();
+		iterable.forEach(new Block<Document>() {
+		    @Override
+		    public void apply(final Document document) {
+				String name = (String) ((Document) document.get("name")).get("id");			
+				products.add(new Product().setName(name).setPrice(56).setCurrency("$").setUrl("images/photo/" + name.replace(" ", "_") +  ".jpg"));
+		    }
+		});
 
 		return products;
 	}
@@ -78,16 +81,17 @@ public class MongoDBDao extends AServicesFacade {
 	@Override
 	public List<Product> getRecommendedImpl(GetRecommendedRequest action) {
 		// run query
-		DBCollection collection = getDatabase().getCollection("product");
-		DBCursor cursor = collection.find().limit(3);
+		FindIterable<Document> iterable = getCollection("product").find().limit(3);
 
 		// create output
-		List<Product> products = new ArrayList<Product>();
-		while (cursor.hasNext()) {
-			DBObject record = cursor.next();
-			String name = (String) ((DBObject) record.get("name")).get("id");
-			products.add(new Product().setName(name).setPrice(56).setCurrency("$").setUrl("images/photo/" + name.replace(" ", "_") +  ".jpg"));
-		}
+		final List<Product> products = new ArrayList<Product>();
+		iterable.forEach(new Block<Document>() {
+		    @Override
+		    public void apply(final Document document) {
+				String name = (String) ((Document) document.get("name")).get("id");			
+				products.add(new Product().setName(name).setPrice(56).setCurrency("$").setUrl("images/photo/" + name.replace(" ", "_") +  ".jpg"));
+		    }
+		});
 		
 		return products;
 	}
@@ -95,19 +99,18 @@ public class MongoDBDao extends AServicesFacade {
 	@Override
 	public List<SubCategory> getSubCategoriesImpl(GetSubCategoriesRequest action) {
 		// run query
-		DBCollection collection = getDatabase().getCollection("product");
 		BasicDBObject group = new BasicDBObject("$group", new BasicDBObject("_id", "$os.type").append("docs", new BasicDBObject("$push", "$$ROOT")).append("count", new BasicDBObject("$sum", 1)));
 		BasicDBObject sort = new BasicDBObject("$sort", new BasicDBObject("count", -1));
 		BasicDBObject limit = new BasicDBObject("$limit", 5);		
-	    Iterable<DBObject> output = collection.aggregate(Arrays.asList(group, sort, limit)).results();
+		AggregateIterable<Document> output = getCollection("product").aggregate(Arrays.asList(group, sort, limit));
 
 	    // create output
 	    final List<SubCategory> result = new ArrayList<SubCategory>();
-	    for (DBObject dbObject : output) {
-	        SubCategory subCategory = new SubCategory().setName("" + dbObject.get("_id"));
+	    for (Document document : output) {
+	        SubCategory subCategory = new SubCategory().setName("" + document.get("_id"));
 	        for (int i = 0; i < 4; i++) {
-	        	BasicDBObject item = (BasicDBObject) ((BasicDBList)dbObject.get("docs")).get(i);
-	        	BasicDBObject name = (BasicDBObject) item.get("name");
+	        	Document item = (Document) ((List<Document>) document.get("docs")).get(i);
+	        	Document name = (Document) item.get("name");
 	        	subCategory.addProduct(new Product().setName(name.get("id") + ""));
 	        }
 			result.add(subCategory);
@@ -120,22 +123,21 @@ public class MongoDBDao extends AServicesFacade {
 	// Manage Connection
 	// *************************************************************************************************
 	private static MongoClient mongoClient = null;
-	private static DB db = null;
+	private static MongoDatabase db = null;
 	@Override
 	protected void pre() {
-		System.out.println("open");
 		if (mongoClient == null)
 			mongoClient = new MongoClient( "localhost" , 27017 );
-		
 	}
 	@Override
 	protected void post() {
 		mongoClient.close();
 		db = null;
 	}
-	private DB getDatabase() {
+	private MongoCollection<Document> getCollection(String name) {
 		if (db == null)
-			db = mongoClient.getDB( "comparephone" );
-		return db;
+			db = mongoClient.getDatabase( "comparephone" );
+				
+		return db.getCollection(name);
 	}
 }

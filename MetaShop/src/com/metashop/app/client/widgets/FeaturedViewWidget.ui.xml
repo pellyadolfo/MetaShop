@@ -7,22 +7,12 @@
 			<div class="single-products">
 				<div class="productinfo text-center">
 					<img ui:field="image" src="images/home/product5.jpg" alt="" />
-					<h2 ui:field="price1">$56</h2>
-					<p ui:field="name1">Easy Polo Black Edition</p>
+					<h2 ui:field="price">$56</h2>
+					<g:Label ui:field="name">Easy Polo Black Edition</g:Label>
 					<a href="#" class="btn btn-default add-to-cart">
 						<i class="fa fa-shopping-cart"></i>
 						Add to cart
 					</a>
-				</div>
-				<div class="product-overlay">
-					<div class="overlay-content">
-						<h2 ui:field="price2">$56</h2>
-						<p ui:field="name2">Easy Polo Black Edition</p>
-						<a href="#" class="btn btn-default add-to-cart">
-							<i class="fa fa-shopping-cart"></i>
-							Add to cart
-						</a>
-					</div>
 				</div>
 				<img ui:field="sale" src="images/home/sale.png" class="new" alt="" />
 				<img ui:field="newItem" src="images/home/new.png" class="new" alt="" />

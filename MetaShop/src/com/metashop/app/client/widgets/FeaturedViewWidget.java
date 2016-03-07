@@ -4,6 +4,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.ParagraphElement;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 
 /*
  * #%L
@@ -27,8 +29,11 @@ import com.google.gwt.dom.client.ParagraphElement;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.metashop.app.data.Product;
 
 public class FeaturedViewWidget extends Composite {
@@ -44,19 +49,13 @@ public class FeaturedViewWidget extends Composite {
     }
 	
     @UiField
-    ParagraphElement name1;
+    Label name;
     
     @UiField
-    HeadingElement price1;
+    HeadingElement price;
     
     @UiField
     ImageElement image;
-    
-    //@UiField
-    //ParagraphElement name2;
-    
-    //@UiField
-    //HeadingElement price2;
     
     @UiField
     ImageElement newItem;
@@ -66,10 +65,16 @@ public class FeaturedViewWidget extends Composite {
 
     public FeaturedViewWidget setFeatured(Product productVO) {
     	
-    	name1.setInnerText(productVO.getName());
-    	price1.setInnerText(productVO.getPrice() + productVO.getCurrency());
-    	//name2.setInnerText(productVO.getName());
-    	//price2.setInnerText(productVO.getPrice() + productVO.getCurrency());
+    	//name.setInnerText(productVO.getName());
+    	name.setText(productVO.getName());
+    	name.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				//placeManager.
+			}
+		});
+    	price.setInnerText(productVO.getPrice() + productVO.getCurrency());
     	image.setSrc(productVO.getUrl());
     	
     	if (!productVO.isNew())

@@ -49,8 +49,8 @@ public class ProductsView extends ViewWithUiHandlers<ProductsUiHandlers> impleme
     
     @Override
     public void setBrands(List<Brand> brands) {    	
-		for (int i = 0; i < brands.size(); i++)
-			ul.appendChild(new BrandsView().setBrand(brands.get(i)).getElement().getChild(0));
+		//for (int i = 0; i < brands.size(); i++)
+		//	ul.appendChild(new BrandsView().setBrand(brands.get(i)).getElement().getChild(0));
     }
     
     // ********************************************************************************************

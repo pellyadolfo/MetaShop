@@ -5,16 +5,16 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.metashop.app.data.Product;
+import com.metashop.app.data.Brand;
 
 public class BrandsPresenter extends PresenterWidget<BrandsPresenter.MyView> implements BrandsUiHandlers {
  
     public interface MyView extends View, HasUiHandlers<BrandsUiHandlers> {
-    	void setProduct(Product productVO, int slotsOf12);
+    	void setBrand(Brand brandVO);
     }
     
-    public void setProduct(Product product, int slotsOf12) {
-        getView().setProduct(product, slotsOf12);
+    public void setBrand(Brand brand) {
+        getView().setBrand(brand);
     }
 
     @Inject

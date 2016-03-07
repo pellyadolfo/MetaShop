@@ -2,6 +2,7 @@ package com.metashop.app.client.home;
 
 import java.util.List;
 
+import org.gwtbootstrap3.client.ui.ListGroup;
 import org.gwtbootstrap3.client.ui.NavTabs;
 import org.gwtbootstrap3.client.ui.TabContent;
 import org.gwtbootstrap3.client.ui.TabListItem;
@@ -60,6 +61,9 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     FlowPanel categoriesPanel;
     
     @UiField
+    UListElement brands;
+    
+    @UiField
     FlowPanel divrecommended1;
     
     @UiField
@@ -70,38 +74,17 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     
     @Override
     public void addToSlot(final Object slot, final IsWidget content) {
-        if (slot == HomePresenter.SLOT_RECOMMENDED1) {	
-        	divrecommended1.add(content);
-        } else if (slot == HomePresenter.SLOT_RECOMMENDED2) {
-        	divrecommended2.add(content);
-        } else if (slot == HomePresenter.SLOT_FEATURED) {
-        	featured.add(content);
-        } else if (slot == HomePresenter.SLOT_CATEGORIES) {
+    	if (slot == HomePresenter.SLOT_CATEGORIES)
         	categoriesPanel.add(content);
-        } else super.addToSlot(slot, content);
-    }
-    
-    // ********************************************************************************************
-    // ************************************** Categories ******************************************
-    // ********************************************************************************************
-    
-    /*@Override
-    public void setCategories(List<Category> categories) {
-		for (int i = 0; i < categories.size(); i++)
-			categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
-    }*/
-    
-    // ********************************************************************************************
-    // **************************************** Brands ********************************************
-    // ********************************************************************************************
-    
-    @UiField
-    UListElement ul;
-    
-    @Override
-    public void setBrands(List<Brand> brands) {    	
-		for (int i = 0; i < brands.size(); i++)
-			ul.appendChild(new BrandsView().setBrand(brands.get(i)).getElement().getChild(0));
+    	else if (slot == HomePresenter.SLOT_BRANDS)
+    		brands.appendChild(content.asWidget().getElement().getChild(0));
+    	else if (slot == HomePresenter.SLOT_RECOMMENDED1)
+        	divrecommended1.add(content);
+        else if (slot == HomePresenter.SLOT_RECOMMENDED2)
+        	divrecommended2.add(content);
+        else if (slot == HomePresenter.SLOT_FEATURED)
+        	featured.add(content);
+        else super.addToSlot(slot, content);
     }
     
     // ********************************************************************************************

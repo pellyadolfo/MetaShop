@@ -1,6 +1,8 @@
 package com.metashop.app.client.home;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -39,6 +41,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
+import com.metashop.app.client.widget.brands.BrandsPresenter;
 import com.metashop.app.client.widget.categories.CategoriesPresenter;
 import com.metashop.app.client.widget.featured.FeaturedPresenter;
 import com.metashop.app.client.widget.product.ProductPresenter;
@@ -63,8 +66,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     }
     
     public interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
-    	//void setCategories(List<Category> categories);
-    	void setBrands(List<Brand> brads);
     	void setSubCategories(List<SubCategory> subcategories);
     }
     
@@ -100,7 +101,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     }
     
     // load categories
-    // load featured
     public static final Slot<CategoriesPresenter> SLOT_CATEGORIES = new Slot<CategoriesPresenter>();
     @Inject Provider<CategoriesPresenter> categoriesPresenterProvider;
     public void loadCategories() {
@@ -121,6 +121,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 	    });
     }
     
+    // load brands
+    public static final Slot<BrandsPresenter> SLOT_BRANDS = new Slot<BrandsPresenter>();
+    @Inject Provider<BrandsPresenter> brandsPresenterProvider;
     public void loadBrands() {
         dispatcher.execute(new GetBrandsRequest("textToServer"), new AsyncCallback<GetBrandsResult>() {
             @Override
@@ -130,7 +133,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
             @Override
             public void onSuccess(GetBrandsResult result) {
-	        	getView().setBrands(result.getBrands());
+            	Logger rootLogger = Logger.getLogger("");
+            	rootLogger.log(Level.SEVERE, "pageIndex selected: ");	
+            	
+            	for(int i = 0; i < result.getBrands().size(); i++) {
+            		BrandsPresenter brandsPresenter = brandsPresenterProvider.get();
+            		brandsPresenter.setBrand(result.getBrands().get(i));
+    				getView().addToSlot(SLOT_BRANDS, brandsPresenter);
+            	}
             }
         });
     }

@@ -5,7 +5,6 @@ import java.util.List;
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.html.Text;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -34,13 +33,10 @@ import com.google.gwt.dom.client.UListElement;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.metashop.app.client.widget.product.ProductPresenter;
-import com.metashop.app.client.widget.product.ProductUiHandlers;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 

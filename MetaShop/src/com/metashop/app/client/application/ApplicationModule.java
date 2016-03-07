@@ -26,6 +26,8 @@ import com.metashop.app.client.productdetails.ProductDetailsPresenter;
 import com.metashop.app.client.productdetails.ProductDetailsView;
 import com.metashop.app.client.products.ProductsPresenter;
 import com.metashop.app.client.products.ProductsView;
+import com.metashop.app.client.widget.brands.BrandsPresenter;
+import com.metashop.app.client.widget.brands.BrandsView;
 import com.metashop.app.client.widget.categories.CategoriesPresenter;
 import com.metashop.app.client.widget.categories.CategoriesView;
 import com.metashop.app.client.widget.featured.FeaturedPresenter;
@@ -61,7 +63,7 @@ public class ApplicationModule extends AbstractPresenterModule {
         bindPresenterWidget(ProductPresenter.class, ProductPresenter.MyView.class, ProductView.class);
         bindPresenterWidget(FeaturedPresenter.class, FeaturedPresenter.MyView.class, FeaturedView.class);
         bindPresenterWidget(CategoriesPresenter.class, CategoriesPresenter.MyView.class, CategoriesView.class);
-        //bindPresenterWidget(BrandsPresenter.class, BrandsPresenter.MyView.class, BrandsView.class);
+        bindPresenterWidget(BrandsPresenter.class, BrandsPresenter.MyView.class, BrandsView.class);
         
         // bind constants
         bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.HOME);

@@ -10,9 +10,9 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.metashop.app.client.widget.brands.BrandsViewWidget;
-import com.metashop.app.client.widget.categories.CategoriesViewWidget;
-import com.metashop.app.client.widget.featured.FeaturedViewWidget;
+import com.metashop.app.client.widget.brands.BrandsView;
+import com.metashop.app.client.widget.categories.CategoriesView;
+import com.metashop.app.client.widget.featured.FeaturedView;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 import com.metashop.app.data.Product;
@@ -36,7 +36,7 @@ public class ShopView extends ViewWithUiHandlers<ShopUiHandlers> implements Shop
     @Override
     public void setCategories(List<Category> categories) {
 		for (int i = 0; i < categories.size(); i++)
-			categoriesPanel.add(new CategoriesViewWidget().setCategory(categories.get(i)));
+			categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
     }
 
     // ********************************************************************************************
@@ -49,7 +49,7 @@ public class ShopView extends ViewWithUiHandlers<ShopUiHandlers> implements Shop
     @Override
     public void setBrands(List<Brand> brands) {    	
 		for (int i = 0; i < brands.size(); i++)
-			ul.appendChild(new BrandsViewWidget().setBrand(brands.get(i)).getElement().getChild(0));
+			ul.appendChild(new BrandsView().setBrand(brands.get(i)).getElement().getChild(0));
     }
     
     // ********************************************************************************************
@@ -62,6 +62,6 @@ public class ShopView extends ViewWithUiHandlers<ShopUiHandlers> implements Shop
     @Override
     public void setFeatured(List<Product> featureds) {    	
 		for (int i = 0; i < featureds.size(); i++)
-			div.appendChild(new FeaturedViewWidget().setFeatured(featureds.get(i)).getElement());
+			div.appendChild(new FeaturedView().setFeatured(featureds.get(i)).getElement());
     }
 }

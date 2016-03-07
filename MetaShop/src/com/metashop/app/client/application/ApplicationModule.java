@@ -26,6 +26,8 @@ import com.metashop.app.client.productdetails.ProductDetailsPresenter;
 import com.metashop.app.client.productdetails.ProductDetailsView;
 import com.metashop.app.client.shop.ShopPresenter;
 import com.metashop.app.client.shop.ShopView;
+import com.metashop.app.client.widget.product.ProductPresenter;
+import com.metashop.app.client.widget.product.ProductView;
 
 /**
  * @author Joshua Godi
@@ -50,6 +52,9 @@ public class ApplicationModule extends AbstractPresenterModule {
         bindPresenter(LoginPresenter.class, LoginPresenter.MyView.class, LoginView.class, LoginPresenter.MyProxy.class);
         bindPresenter(ProductDetailsPresenter.class, ProductDetailsPresenter.MyView.class, ProductDetailsView.class, ProductDetailsPresenter.MyProxy.class);
         bindPresenter(ShopPresenter.class, ShopPresenter.MyView.class, ShopView.class, ShopPresenter.MyProxy.class);
+        
+        // widgets
+        bindPresenterWidget(ProductPresenter.class, ProductPresenter.MyView.class, ProductView.class);
         
         // bind constants
         bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.HOME);

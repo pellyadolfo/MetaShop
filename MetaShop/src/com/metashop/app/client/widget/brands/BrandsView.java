@@ -9,21 +9,21 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.metashop.app.data.Brand;
 
-public class BrandsViewWidget extends Composite {
+public class BrandsView extends Composite {
 	
-    interface Binder extends UiBinder<Widget, BrandsViewWidget> {
+    interface Binder extends UiBinder<Widget, BrandsView> {
     }
     
     private static Binder binder = GWT.create(Binder.class);
 
-    public BrandsViewWidget() {
+    public BrandsView() {
         initWidget(binder.createAndBindUi(this));
     }
 	
 	@UiField 
 	AnchorElement anchor;
 
-    public BrandsViewWidget setBrand(Brand brandVO) {
+    public BrandsView setBrand(Brand brandVO) {
     	
     	// need to do the getChild(0) because anchor cannot contain GWT elements
     	anchor.getChild(0).appendChild(Document.get().createTextNode("(" + brandVO.getCount() + ")"));

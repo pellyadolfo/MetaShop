@@ -1,6 +1,8 @@
 package com.metashop.app.client.home;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -25,6 +27,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -33,10 +36,12 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
+import com.metashop.app.client.widget.product.ProductPresenter;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 import com.metashop.app.data.Product;
@@ -62,7 +67,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     	void setCategories(List<Category> categories);
     	void setBrands(List<Brand> brads);
     	void setFeatureds(List<Product> featureds);
-    	void setRecommended(List<Product> recommended);
+    	//void setRecommended(List<Product> recommended);
     	void setSubCategories(List<SubCategory> subcategories);
     }
     
@@ -95,6 +100,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         loadFeatured();
         loadRecommended();
         loadSubCategories();
+        
+    	Logger rootLogger = Logger.getLogger("pipo");
+    	rootLogger.log(Level.SEVERE, "pageIndex selected1: ");
     }
     
     public void loadCategories() {
@@ -138,7 +146,11 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
             }
         });
     }
-    
+
+    public static final Slot<ProductPresenter> SLOT_RECOMMENDED1 = new Slot<ProductPresenter>();
+    public static final Slot<ProductPresenter> SLOT_RECOMMENDED2 = new Slot<ProductPresenter>();
+
+    @Inject Provider<ProductPresenter> productPresenterProvider;
     public void loadRecommended() {
         dispatcher.execute(new GetRecommendedRequest("textToServer"), new AsyncCallback<GetRecommendedResult>() {
             @Override
@@ -148,7 +160,16 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
             @Override
             public void onSuccess(GetRecommendedResult result) {
-            	getView().setRecommended(result.getProducts());
+            	
+            	for(int i = 0; i < 3; i++) {
+            		ProductPresenter productPresenter1 = productPresenterProvider.get();
+    				productPresenter1.setProduct(result.getProducts().get(i), 4);
+    				getView().addToSlot(SLOT_RECOMMENDED1, productPresenter1);
+    				
+            		ProductPresenter productPresenter2 = productPresenterProvider.get();
+    				productPresenter2.setProduct(result.getProducts().get(i), 4);
+    				getView().addToSlot(SLOT_RECOMMENDED2, productPresenter2);
+            	}
             }
         });
     }

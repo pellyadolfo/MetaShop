@@ -40,15 +40,15 @@ import com.google.gwt.user.client.ui.Widget;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 
-public class CategoriesViewWidget extends Composite {
+public class CategoriesView extends Composite {
 	
 	
-    interface Binder extends UiBinder<Widget, CategoriesViewWidget> {
+    interface Binder extends UiBinder<Widget, CategoriesView> {
     }
     
     private static Binder binder = GWT.create(Binder.class);
 
-    public CategoriesViewWidget() {
+    public CategoriesView() {
         initWidget(binder.createAndBindUi(this));
     }
 	
@@ -64,7 +64,7 @@ public class CategoriesViewWidget extends Composite {
 	@UiField
 	Element cross;
 
-    public CategoriesViewWidget setCategory(Category categoryVO) {
+    public CategoriesView setCategory(Category categoryVO) {
     	
     	// text
     	anchor.add(new Text(categoryVO.getName()));    	

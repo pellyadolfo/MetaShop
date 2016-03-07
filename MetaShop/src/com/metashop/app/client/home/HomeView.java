@@ -1,6 +1,8 @@
 package com.metashop.app.client.home;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.gwtbootstrap3.client.ui.NavTabs;
 import org.gwtbootstrap3.client.ui.TabContent;
@@ -38,10 +40,9 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.metashop.app.client.widget.brands.BrandsViewWidget;
-import com.metashop.app.client.widget.categories.CategoriesViewWidget;
-import com.metashop.app.client.widget.featured.FeaturedViewWidget;
-import com.metashop.app.client.widget.product.ProductViewWidget;
+import com.metashop.app.client.widget.brands.BrandsView;
+import com.metashop.app.client.widget.categories.CategoriesView;
+import com.metashop.app.client.widget.featured.FeaturedView;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 import com.metashop.app.data.Product;
@@ -57,16 +58,28 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     }
     
     // ********************************************************************************************
-    // ****************************************** Slot ********************************************
+    // ****************************************** Slots *******************************************
     // ********************************************************************************************
+    
+    @UiField
+    FlowPanel divrecommended1;
+    
+    @UiField
+    FlowPanel divrecommended2;
     
     @Override
     public void addToSlot(final Object slot, final IsWidget content) {
-        if (slot == HomePresenter.TYPE_CATEGORY) {
+        if (slot == HomePresenter.TYPE_CATEGORY)
         	categoriesPanel.add(content);
-        } else {
-            super.addToSlot(slot, content);
-        }
+        else if (slot == HomePresenter.SLOT_RECOMMENDED1) {
+        	Logger rootLogger = Logger.getLogger("pipo");
+        	rootLogger.log(Level.SEVERE, "pageIndex selected45 " + content);	
+        	divrecommended1.add(content);
+        } else if (slot == HomePresenter.SLOT_RECOMMENDED2) {
+        	Logger rootLogger = Logger.getLogger("pipo");
+        	rootLogger.log(Level.SEVERE, "pageIndex selected45 " + content);	
+        	divrecommended2.add(content);
+        } else super.addToSlot(slot, content);
     }
     
     // ********************************************************************************************
@@ -79,7 +92,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Override
     public void setCategories(List<Category> categories) {
 		for (int i = 0; i < categories.size(); i++)
-			categoriesPanel.add(new CategoriesViewWidget().setCategory(categories.get(i)));
+			categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
     }
     
     // ********************************************************************************************
@@ -92,7 +105,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Override
     public void setBrands(List<Brand> brands) {    	
 		for (int i = 0; i < brands.size(); i++)
-			ul.appendChild(new BrandsViewWidget().setBrand(brands.get(i)).getElement().getChild(0));
+			ul.appendChild(new BrandsView().setBrand(brands.get(i)).getElement().getChild(0));
     }
     
     // ********************************************************************************************
@@ -105,25 +118,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @Override
     public void setFeatureds(List<Product> featureds) {    	
 		for (int i = 0; i < featureds.size(); i++)
-			div.appendChild(new FeaturedViewWidget().setFeatured(featureds.get(i)).getElement());
-    }
-    
-    // ********************************************************************************************
-    // ************************************* Recommended ******************************************
-    // ********************************************************************************************
-    
-    @UiField
-    DivElement divrecommended1;
-    
-    @UiField
-    DivElement divrecommended2;
-    
-    @Override
-    public void setRecommended(List<Product> recommended) {
-		for (int i = 0; i < recommended.size(); i++) {
-			divrecommended1.appendChild(new ProductViewWidget().setRecommended(recommended.get(i), 4).getElement());
-			divrecommended2.appendChild(new ProductViewWidget().setRecommended(recommended.get(i), 4).getElement());
-		}
+			div.appendChild(new FeaturedView().setFeatured(featureds.get(i)).getElement());
     }
     
     // ********************************************************************************************
@@ -153,9 +148,9 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
 			tabPane.setActive(i == 0);
 			tabPane.setIn(i == 0);
 			tabPane.setId(subcategories.get(i).getName().replace(" ", "").toLowerCase());
-    		for (int j = 0; j < subcategories.get(i).getProduct().size(); j++)
-    			tabPane.add(new ProductViewWidget().setRecommended(subcategories.get(i).getProduct().get(j), 3));
-			tabContent.add(tabPane);
+    		//for (int j = 0; j < subcategories.get(i).getProduct().size(); j++)
+    		//	tabPane.add(new ProductView().setProduct(subcategories.get(i).getProduct().get(j), 3));
+			//tabContent.add(tabPane);
     	}
     }
 }

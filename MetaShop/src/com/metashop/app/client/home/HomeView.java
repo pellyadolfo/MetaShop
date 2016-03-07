@@ -1,8 +1,6 @@
 package com.metashop.app.client.home;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.gwtbootstrap3.client.ui.NavTabs;
 import org.gwtbootstrap3.client.ui.TabContent;
@@ -10,7 +8,6 @@ import org.gwtbootstrap3.client.ui.TabListItem;
 import org.gwtbootstrap3.client.ui.TabPane;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 
-import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.UListElement;
 
 /*
@@ -42,10 +39,8 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.metashop.app.client.widget.brands.BrandsView;
 import com.metashop.app.client.widget.categories.CategoriesView;
-import com.metashop.app.client.widget.featured.FeaturedView;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
-import com.metashop.app.data.Product;
 import com.metashop.app.data.SubCategory;
 
 public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements HomePresenter.MyView {
@@ -67,20 +62,34 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     @UiField
     FlowPanel divrecommended2;
     
+    @UiField
+    FlowPanel featured;
+    
     @Override
     public void addToSlot(final Object slot, final IsWidget content) {
         if (slot == HomePresenter.TYPE_CATEGORY)
         	categoriesPanel.add(content);
-        else if (slot == HomePresenter.SLOT_RECOMMENDED1) {
-        	Logger rootLogger = Logger.getLogger("pipo");
-        	rootLogger.log(Level.SEVERE, "pageIndex selected45 " + content);	
+        else if (slot == HomePresenter.SLOT_RECOMMENDED1) {	
         	divrecommended1.add(content);
         } else if (slot == HomePresenter.SLOT_RECOMMENDED2) {
-        	Logger rootLogger = Logger.getLogger("pipo");
-        	rootLogger.log(Level.SEVERE, "pageIndex selected45 " + content);	
         	divrecommended2.add(content);
+        } else if (slot == HomePresenter.SLOT_FEATURED) {
+        	featured.add(content);
         } else super.addToSlot(slot, content);
     }
+    
+    // ********************************************************************************************
+    // **************************************** Featured ******************************************
+    // ********************************************************************************************
+    
+    /*@UiField
+    FlowPanel featured;
+    
+    @Override
+    public void setFeatureds(List<Product> featureds) {    	
+		for (int i = 0; i < featureds.size(); i++)
+			featured.appendChild(new FeaturedView().setFeatured(featureds.get(i)).getElement());
+    }*/
     
     // ********************************************************************************************
     // ************************************** Categories ******************************************
@@ -106,19 +115,6 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     public void setBrands(List<Brand> brands) {    	
 		for (int i = 0; i < brands.size(); i++)
 			ul.appendChild(new BrandsView().setBrand(brands.get(i)).getElement().getChild(0));
-    }
-    
-    // ********************************************************************************************
-    // **************************************** Featured ******************************************
-    // ********************************************************************************************
-    
-    @UiField
-    DivElement div;
-    
-    @Override
-    public void setFeatureds(List<Product> featureds) {    	
-		for (int i = 0; i < featureds.size(); i++)
-			div.appendChild(new FeaturedView().setFeatured(featureds.get(i)).getElement());
     }
     
     // ********************************************************************************************

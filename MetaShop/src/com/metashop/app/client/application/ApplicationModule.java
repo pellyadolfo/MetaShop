@@ -24,8 +24,10 @@ import com.metashop.app.client.login.LoginPresenter;
 import com.metashop.app.client.login.LoginView;
 import com.metashop.app.client.productdetails.ProductDetailsPresenter;
 import com.metashop.app.client.productdetails.ProductDetailsView;
-import com.metashop.app.client.shop.ShopPresenter;
-import com.metashop.app.client.shop.ShopView;
+import com.metashop.app.client.products.ProductsPresenter;
+import com.metashop.app.client.products.ProductsView;
+import com.metashop.app.client.widget.featured.FeaturedPresenter;
+import com.metashop.app.client.widget.featured.FeaturedView;
 import com.metashop.app.client.widget.product.ProductPresenter;
 import com.metashop.app.client.widget.product.ProductView;
 
@@ -51,10 +53,13 @@ public class ApplicationModule extends AbstractPresenterModule {
         bindPresenter(HomePresenter.class, HomePresenter.MyView.class, HomeView.class, HomePresenter.MyProxy.class);
         bindPresenter(LoginPresenter.class, LoginPresenter.MyView.class, LoginView.class, LoginPresenter.MyProxy.class);
         bindPresenter(ProductDetailsPresenter.class, ProductDetailsPresenter.MyView.class, ProductDetailsView.class, ProductDetailsPresenter.MyProxy.class);
-        bindPresenter(ShopPresenter.class, ShopPresenter.MyView.class, ShopView.class, ShopPresenter.MyProxy.class);
+        bindPresenter(ProductsPresenter.class, ProductsPresenter.MyView.class, ProductsView.class, ProductsPresenter.MyProxy.class);
         
         // widgets
         bindPresenterWidget(ProductPresenter.class, ProductPresenter.MyView.class, ProductView.class);
+        bindPresenterWidget(FeaturedPresenter.class, FeaturedPresenter.MyView.class, FeaturedView.class);
+        //bindPresenterWidget(CategoriesPresenter.class, CategoriesPresenter.MyView.class, CategoriesView.class);
+        //bindPresenterWidget(BrandsPresenter.class, BrandsPresenter.MyView.class, BrandsView.class);
         
         // bind constants
         bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.HOME);

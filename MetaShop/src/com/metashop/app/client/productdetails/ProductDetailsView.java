@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.UListElement;
 
 /*
@@ -34,14 +33,11 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.metashop.app.client.home.HomePresenter;
 import com.metashop.app.client.widget.brands.BrandsView;
 import com.metashop.app.client.widget.categories.CategoriesView;
-import com.metashop.app.client.widget.product.ProductPresenter;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
-import com.metashop.app.data.Product;
 
 public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandlers> implements ProductDetailsPresenter.MyView {
     interface Binder extends UiBinder<Widget, ProductDetailsView> {

@@ -1,6 +1,5 @@
 package com.metashop.app.client.widget.featured;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -28,22 +27,31 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.ViewImpl;
 import com.metashop.app.data.Product;
 
-public class FeaturedView extends Composite {
-	
+public class FeaturedView extends ViewImpl implements FeaturedPresenter.MyView {
 	
     interface Binder extends UiBinder<Widget, FeaturedView> {
     }
     
-    private static Binder binder = GWT.create(Binder.class);
-
-    public FeaturedView() {
+    @Inject
+    public FeaturedView(Binder binder) {
         initWidget(binder.createAndBindUi(this));
     }
+    
+	@Override
+	public void setUiHandlers(FeaturedUiHandlers uiHandlers) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+    @UiField
+    HTMLPanel featuredcell;
 	
     @UiField
     Label name;
@@ -60,9 +68,10 @@ public class FeaturedView extends Composite {
     @UiField
     ImageElement sale;
 
-    public FeaturedView setFeatured(Product productVO) {
+    public void setProduct(Product productVO, int slotsOf12) {
     	
     	//name.setInnerText(productVO.getName());
+    	featuredcell.setStyleName("col-sm-" + slotsOf12);
     	name.setText(productVO.getName());
     	name.addClickHandler(new ClickHandler() {
 			@Override
@@ -78,7 +87,5 @@ public class FeaturedView extends Composite {
     		newItem.removeFromParent();
     	if (!productVO.isSale())
     		sale.removeFromParent();
-    	
-    	return this;
     }
 }

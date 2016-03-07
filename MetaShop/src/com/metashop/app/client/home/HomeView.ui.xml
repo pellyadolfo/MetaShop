@@ -266,9 +266,7 @@
 					<!--features_items-->
 					<div class="features_items">
 						<h2 class="title text-center">Features Items</h2>
-						<div ui:field="div">
-						</div>
-						
+						<g:FlowPanel ui:field="featured"/>
 					</div>
 					<!--features_items-->
 					

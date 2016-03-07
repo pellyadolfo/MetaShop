@@ -1,9 +1,10 @@
-package com.metashop.app.client.shop;
+package com.metashop.app.client.products;
 
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -11,10 +12,12 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
+import com.metashop.app.client.widget.featured.FeaturedPresenter;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 import com.metashop.app.data.Product;
@@ -25,23 +28,23 @@ import com.metashop.app.dispatch.GetCategoriesResult;
 import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetFeaturedResult;
 
-public class ShopPresenter extends Presenter<ShopPresenter.MyView, ShopPresenter.MyProxy> implements ShopUiHandlers {
+public class ProductsPresenter extends Presenter<ProductsPresenter.MyView, ProductsPresenter.MyProxy> implements ProductsUiHandlers {
     @ProxyCodeSplit
     @NameToken(NameTokens.SHOP)
-    public interface MyProxy extends ProxyPlace<ShopPresenter> {
+    public interface MyProxy extends ProxyPlace<ProductsPresenter> {
     }
     
-    public interface MyView extends View, HasUiHandlers<ShopUiHandlers> {
+    public interface MyView extends View, HasUiHandlers<ProductsUiHandlers> {
     	void setCategories(List<Category> categories);
     	void setBrands(List<Brand> brads);
-    	void setFeatured(List<Product> featured);
+    	//void setFeatured(List<Product> featured);
     }
     
     private final DispatchAsync dispatcher;
     private final PlaceManager placeManager;
 
     @Inject
-    public ShopPresenter(final EventBus eventBus,
+    public ProductsPresenter(final EventBus eventBus,
                           final MyView view,
                           final MyProxy proxy,
                           PlaceManager placeManager,		// This comes here because Proxy has been declared as place
@@ -87,6 +90,9 @@ public class ShopPresenter extends Presenter<ShopPresenter.MyView, ShopPresenter
         });
     }
     
+    // load featured
+    public static final Slot<FeaturedPresenter> SLOT_FEATURED = new Slot<FeaturedPresenter>();
+    @Inject Provider<FeaturedPresenter> featuredPresenterProvider;
     public void loadFeatured() {
         dispatcher.execute(new GetFeaturedRequest(12), new AsyncCallback<GetFeaturedResult>() {
             @Override
@@ -96,7 +102,13 @@ public class ShopPresenter extends Presenter<ShopPresenter.MyView, ShopPresenter
 
             @Override
             public void onSuccess(GetFeaturedResult result) {
-            	getView().setFeatured(result.getProducts());
+            	//getView().setFeatureds(result.getProducts());
+            	
+            	for(int i = 0; i < result.getProducts().size(); i++) {
+            		FeaturedPresenter featuredPresenter = featuredPresenterProvider.get();
+            		featuredPresenter.setProduct(result.getProducts().get(i), 4);
+    				getView().addToSlot(SLOT_FEATURED, featuredPresenter);
+            	}
             }
         });
     }

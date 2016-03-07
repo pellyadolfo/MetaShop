@@ -1,8 +1,6 @@
 package com.metashop.app.client.home;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -41,10 +39,10 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
+import com.metashop.app.client.widget.featured.FeaturedPresenter;
 import com.metashop.app.client.widget.product.ProductPresenter;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
-import com.metashop.app.data.Product;
 import com.metashop.app.data.SubCategory;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
@@ -66,8 +64,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     public interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
     	void setCategories(List<Category> categories);
     	void setBrands(List<Brand> brads);
-    	void setFeatureds(List<Product> featureds);
-    	//void setRecommended(List<Product> recommended);
     	void setSubCategories(List<SubCategory> subcategories);
     }
     
@@ -100,9 +96,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         loadFeatured();
         loadRecommended();
         loadSubCategories();
-        
-    	Logger rootLogger = Logger.getLogger("pipo");
-    	rootLogger.log(Level.SEVERE, "pageIndex selected1: ");
     }
     
     public void loadCategories() {
@@ -133,6 +126,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         });
     }
     
+    // load featured
+    public static final Slot<FeaturedPresenter> SLOT_FEATURED = new Slot<FeaturedPresenter>();
+    @Inject Provider<FeaturedPresenter> featuredPresenterProvider;
     public void loadFeatured() {
         dispatcher.execute(new GetFeaturedRequest(6), new AsyncCallback<GetFeaturedResult>() {
             @Override
@@ -142,14 +138,20 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
             @Override
             public void onSuccess(GetFeaturedResult result) {
-            	getView().setFeatureds(result.getProducts());
+            	//getView().setFeatureds(result.getProducts());
+            	
+            	for(int i = 0; i < result.getProducts().size(); i++) {
+            		FeaturedPresenter featuredPresenter = featuredPresenterProvider.get();
+            		featuredPresenter.setProduct(result.getProducts().get(i), 4);
+    				getView().addToSlot(SLOT_FEATURED, featuredPresenter);
+            	}
             }
         });
     }
 
+    // load recommended
     public static final Slot<ProductPresenter> SLOT_RECOMMENDED1 = new Slot<ProductPresenter>();
     public static final Slot<ProductPresenter> SLOT_RECOMMENDED2 = new Slot<ProductPresenter>();
-
     @Inject Provider<ProductPresenter> productPresenterProvider;
     public void loadRecommended() {
         dispatcher.execute(new GetRecommendedRequest("textToServer"), new AsyncCallback<GetRecommendedResult>() {

@@ -41,7 +41,6 @@ import com.metashop.app.client.application.ApplicationPresenter;
 import com.metashop.app.client.widget.product.ProductPresenter;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
-import com.metashop.app.data.Product;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
 import com.metashop.app.dispatch.GetCategoriesRequest;

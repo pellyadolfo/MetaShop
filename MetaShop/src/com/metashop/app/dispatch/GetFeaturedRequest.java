@@ -19,10 +19,10 @@ package com.metashop.app.dispatch;
 import com.gwtplatform.dispatch.rpc.shared.UnsecuredActionImpl;
 
 public class GetFeaturedRequest extends UnsecuredActionImpl<GetFeaturedResult> {
-	private String textToServer;
+	private int count;
 
-    public GetFeaturedRequest(String textToServer) {
-        this.textToServer = textToServer;
+    public GetFeaturedRequest(int count) {
+        this.count = count;
     }
 
     /**
@@ -32,7 +32,7 @@ public class GetFeaturedRequest extends UnsecuredActionImpl<GetFeaturedResult> {
     private GetFeaturedRequest() {
     }
     
-    public String getTextToServer() {
-    	return textToServer;
+    public int getCount() {
+    	return count;
     }
 }

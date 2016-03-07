@@ -88,7 +88,7 @@ public class ShopPresenter extends Presenter<ShopPresenter.MyView, ShopPresenter
     }
     
     public void loadFeatured() {
-        dispatcher.execute(new GetFeaturedRequest("12"), new AsyncCallback<GetFeaturedResult>() {
+        dispatcher.execute(new GetFeaturedRequest(12), new AsyncCallback<GetFeaturedResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 //getView().setServerResponse("An error occurred: " + caught.getMessage());

@@ -47,7 +47,7 @@ public class HardcodedDao extends AServicesFacade {
 	@Override
 	public List<Product> getFeaturedImpl(GetFeaturedRequest action) {
         List<Product> featured = new ArrayList<Product>();
-    	if (action.getTextToServer().equals("6")) {
+    	if (action.getCount() == 6 ) {
 	        // add categories
 	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product1.jpg"));
 	        featured.add(new Product().setName("Easy Polo Black Edition").setPrice(56).setCurrency("$").setUrl("images/home/product2.jpg"));   

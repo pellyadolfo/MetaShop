@@ -126,7 +126,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     }
     
     public void loadFeatured() {
-        dispatcher.execute(new GetFeaturedRequest("6"), new AsyncCallback<GetFeaturedResult>() {
+        dispatcher.execute(new GetFeaturedRequest(6), new AsyncCallback<GetFeaturedResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 //getView().setServerResponse("An error occurred: " + caught.getMessage());

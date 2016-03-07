@@ -63,7 +63,7 @@ public class MongoDBDao extends AServicesFacade {
 	@Override
 	public List<Product> getFeaturedImpl(GetFeaturedRequest action) {
 		// run query
-		FindIterable<Document> iterable = getCollection("product").find().limit(6);
+		FindIterable<Document> iterable = getCollection("product").find().limit(action.getCount());
 		
 		// create output
 		final List<Product> products = new ArrayList<Product>();
@@ -126,8 +126,6 @@ public class MongoDBDao extends AServicesFacade {
 	private static MongoDatabase db = null;
 	@Override
 	protected void pre() {
-		if (mongoClient == null)
-			mongoClient = new MongoClient( "localhost" , 27017 );
 	}
 	@Override
 	protected void post() {
@@ -135,8 +133,10 @@ public class MongoDBDao extends AServicesFacade {
 		db = null;
 	}
 	private MongoCollection<Document> getCollection(String name) {
-		if (db == null)
+		if (db == null || mongoClient == null) {
+			mongoClient = new MongoClient( "localhost" , 27017 );
 			db = mongoClient.getDatabase( "comparephone" );
+		}
 				
 		return db.getCollection(name);
 	}

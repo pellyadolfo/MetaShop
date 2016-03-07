@@ -52,11 +52,11 @@ public class FeaturedViewWidget extends Composite {
     @UiField
     ImageElement image;
     
-    @UiField
-    ParagraphElement name2;
+    //@UiField
+    //ParagraphElement name2;
     
-    @UiField
-    HeadingElement price2;
+    //@UiField
+    //HeadingElement price2;
     
     @UiField
     ImageElement newItem;
@@ -68,8 +68,8 @@ public class FeaturedViewWidget extends Composite {
     	
     	name1.setInnerText(productVO.getName());
     	price1.setInnerText(productVO.getPrice() + productVO.getCurrency());
-    	name2.setInnerText(productVO.getName());
-    	price2.setInnerText(productVO.getPrice() + productVO.getCurrency());
+    	//name2.setInnerText(productVO.getName());
+    	//price2.setInnerText(productVO.getPrice() + productVO.getCurrency());
     	image.setSrc(productVO.getUrl());
     	
     	if (!productVO.isNew())

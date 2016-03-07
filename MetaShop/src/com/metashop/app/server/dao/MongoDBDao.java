@@ -16,15 +16,13 @@ import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetSubCategoriesRequest;
 import com.metashop.app.server.AServicesFacade;
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.Block;
 
 public class MongoDBDao extends AServicesFacade {
 	
@@ -71,7 +69,7 @@ public class MongoDBDao extends AServicesFacade {
 		    @Override
 		    public void apply(final Document document) {
 				String name = (String) ((Document) document.get("name")).get("id");			
-				products.add(new Product().setName(name).setPrice(56).setCurrency("$").setUrl("images/photo/" + name.replace(" ", "_") +  ".jpg"));
+				products.add(new Product().setName(name).setPrice(56).setCurrency("$").setUrl("images/photo/F-12C.jpg"));
 		    }
 		});
 
@@ -89,7 +87,7 @@ public class MongoDBDao extends AServicesFacade {
 		    @Override
 		    public void apply(final Document document) {
 				String name = (String) ((Document) document.get("name")).get("id");			
-				products.add(new Product().setName(name).setPrice(56).setCurrency("$").setUrl("images/photo/" + name.replace(" ", "_") +  ".jpg"));
+				products.add(new Product().setName(name).setPrice(56).setCurrency("$").setUrl("images/photo/F-12C.jpg"));
 		    }
 		});
 		
@@ -111,7 +109,7 @@ public class MongoDBDao extends AServicesFacade {
 	        for (int i = 0; i < 4; i++) {
 	        	Document item = (Document) ((List<Document>) document.get("docs")).get(i);
 	        	Document name = (Document) item.get("name");
-	        	subCategory.addProduct(new Product().setName(name.get("id") + ""));
+	        	subCategory.addProduct(new Product().setName(name.get("id") + "").setPrice(56).setCurrency("$").setUrl("images/photo/F-12C.jpg"));
 	        }
 			result.add(subCategory);
 	    }

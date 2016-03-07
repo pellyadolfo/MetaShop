@@ -53,8 +53,8 @@ public class BlogSingleView extends ViewWithUiHandlers<BlogSingleUiHandlers> imp
     
     @Override
     public void setCategories(List<Category> categories) {
-		for (int i = 0; i < categories.size(); i++)
-			categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
+		//for (int i = 0; i < categories.size(); i++)
+		//	categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
     }
     
     // ********************************************************************************************

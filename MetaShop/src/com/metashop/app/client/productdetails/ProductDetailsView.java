@@ -57,8 +57,8 @@ public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandl
     
     @Override
     public void setCategories(List<Category> categories) {
-		for (int i = 0; i < categories.size(); i++)
-			categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
+		//for (int i = 0; i < categories.size(); i++)
+		//	categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
     }
     
     // ********************************************************************************************
@@ -86,9 +86,7 @@ public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandl
     
     @Override
     public void addToSlot(final Object slot, final IsWidget content) {
-        if (slot == HomePresenter.TYPE_CATEGORY)
-        	categoriesPanel.add(content);
-        else if (slot == ProductDetailsPresenter.SLOT_RECOMMENDED1) {
+        if (slot == ProductDetailsPresenter.SLOT_RECOMMENDED1) {
         	Logger rootLogger = Logger.getLogger("pipo");
         	rootLogger.log(Level.SEVERE, "pageIndex selected45 " + content);	
         	divrecommended1.add(content);

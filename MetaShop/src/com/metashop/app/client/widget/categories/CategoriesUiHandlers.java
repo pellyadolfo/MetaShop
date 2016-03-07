@@ -19,5 +19,4 @@ package com.metashop.app.client.widget.categories;
 import com.gwtplatform.mvp.client.UiHandlers;
 
 public interface CategoriesUiHandlers extends UiHandlers {
-    void showProductDetails(String name);
 }

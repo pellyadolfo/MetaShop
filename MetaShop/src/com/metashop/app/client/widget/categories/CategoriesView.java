@@ -37,20 +37,28 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.ViewImpl;
+import com.metashop.app.client.widget.product.ProductPresenter;
+import com.metashop.app.client.widget.product.ProductUiHandlers;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 
-public class CategoriesView extends Composite {
-	
+public class CategoriesView extends ViewImpl implements CategoriesPresenter.MyView {
 	
     interface Binder extends UiBinder<Widget, CategoriesView> {
     }
     
-    private static Binder binder = GWT.create(Binder.class);
-
-    public CategoriesView() {
+    @Inject
+    public CategoriesView(Binder binder) {
         initWidget(binder.createAndBindUi(this));
     }
+    
+	@Override
+	public void setUiHandlers(CategoriesUiHandlers uiHandlers) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	@UiField 
 	UListElement brands;
@@ -64,7 +72,7 @@ public class CategoriesView extends Composite {
 	@UiField
 	Element cross;
 
-    public CategoriesView setCategory(Category categoryVO) {
+    public void setCategory(Category categoryVO) {
     	
     	// text
     	anchor.add(new Text(categoryVO.getName()));    	
@@ -88,7 +96,5 @@ public class CategoriesView extends Composite {
     	// cross
     	if(brandsVO.size() == 0)
     		cross.removeFromParent();
-    	
-    	return this;
     }
 }

@@ -36,8 +36,8 @@ public class ProductsView extends ViewWithUiHandlers<ProductsUiHandlers> impleme
     
     @Override
     public void setCategories(List<Category> categories) {
-		for (int i = 0; i < categories.size(); i++)
-			categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
+		//for (int i = 0; i < categories.size(); i++)
+		//	categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
     }
 
     // ********************************************************************************************
@@ -68,9 +68,7 @@ public class ProductsView extends ViewWithUiHandlers<ProductsUiHandlers> impleme
     
     @Override
     public void addToSlot(final Object slot, final IsWidget content) {
-        if (slot == HomePresenter.TYPE_CATEGORY)
-        	categoriesPanel.add(content);
-        else if (slot == ProductsPresenter.SLOT_FEATURED) {
+        if (slot == ProductsPresenter.SLOT_FEATURED) {
         	featured.add(content);
         } else super.addToSlot(slot, content);
     }

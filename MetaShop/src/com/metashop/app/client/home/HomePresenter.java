@@ -39,6 +39,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
+import com.metashop.app.client.widget.categories.CategoriesPresenter;
 import com.metashop.app.client.widget.featured.FeaturedPresenter;
 import com.metashop.app.client.widget.product.ProductPresenter;
 import com.metashop.app.data.Brand;
@@ -62,7 +63,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     }
     
     public interface MyView extends View, HasUiHandlers<HomeUiHandlers> {
-    	void setCategories(List<Category> categories);
+    	//void setCategories(List<Category> categories);
     	void setBrands(List<Brand> brads);
     	void setSubCategories(List<SubCategory> subcategories);
     }
@@ -70,7 +71,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     /**
      * Use this in leaf presenters, inside their {@link #revealInParent} method.
      */
-    public static final NestedSlot TYPE_CATEGORY = new NestedSlot();
+    //public static final NestedSlot TYPE_CATEGORY = new NestedSlot();
     
     private final DispatchAsync dispatcher;
     private final PlaceManager placeManager;
@@ -98,6 +99,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         loadSubCategories();
     }
     
+    // load categories
+    // load featured
+    public static final Slot<CategoriesPresenter> SLOT_CATEGORIES = new Slot<CategoriesPresenter>();
+    @Inject Provider<CategoriesPresenter> categoriesPresenterProvider;
     public void loadCategories() {
         dispatcher.execute(new GetCategoriesRequest("textToServer"), new AsyncCallback<GetCategoriesResult>() {
 	        @Override
@@ -107,7 +112,11 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 	
 	        @Override
 	        public void onSuccess(GetCategoriesResult result) {
-	        	getView().setCategories(result.getCategories());
+            	for(int i = 0; i < result.getCategories().size(); i++) {
+            		CategoriesPresenter categoriesPresenter = categoriesPresenterProvider.get();
+            		categoriesPresenter.setCategory(result.getCategories().get(i));
+    				getView().addToSlot(SLOT_CATEGORIES, categoriesPresenter);
+            	}
 	        }
 	    });
     }

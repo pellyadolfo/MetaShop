@@ -5,16 +5,17 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+import com.metashop.app.data.Category;
 import com.metashop.app.data.Product;
 
 public class CategoriesPresenter extends PresenterWidget<CategoriesPresenter.MyView> implements CategoriesUiHandlers {
  
     public interface MyView extends View, HasUiHandlers<CategoriesUiHandlers> {
-    	void setProduct(Product productVO, int slotsOf12);
+    	void setCategory(Category categoryVO);
     }
     
-    public void setProduct(Product product, int slotsOf12) {
-        getView().setProduct(product, slotsOf12);
+    public void setCategory(Category category) {
+        getView().setCategory(category);
     }
 
     @Inject
@@ -22,11 +23,5 @@ public class CategoriesPresenter extends PresenterWidget<CategoriesPresenter.MyV
         super(eventBus, view);
         
         getView().setUiHandlers(this);
-    }
-    
-    @Override
-    public void showProductDetails(String name) {
-    	// TODO Auto-generated method stub
-    	
     }
 }

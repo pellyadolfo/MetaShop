@@ -57,6 +57,9 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     // ********************************************************************************************
     
     @UiField
+    FlowPanel categoriesPanel;
+    
+    @UiField
     FlowPanel divrecommended1;
     
     @UiField
@@ -67,42 +70,26 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     
     @Override
     public void addToSlot(final Object slot, final IsWidget content) {
-        if (slot == HomePresenter.TYPE_CATEGORY)
-        	categoriesPanel.add(content);
-        else if (slot == HomePresenter.SLOT_RECOMMENDED1) {	
+        if (slot == HomePresenter.SLOT_RECOMMENDED1) {	
         	divrecommended1.add(content);
         } else if (slot == HomePresenter.SLOT_RECOMMENDED2) {
         	divrecommended2.add(content);
         } else if (slot == HomePresenter.SLOT_FEATURED) {
         	featured.add(content);
+        } else if (slot == HomePresenter.SLOT_CATEGORIES) {
+        	categoriesPanel.add(content);
         } else super.addToSlot(slot, content);
     }
-    
-    // ********************************************************************************************
-    // **************************************** Featured ******************************************
-    // ********************************************************************************************
-    
-    /*@UiField
-    FlowPanel featured;
-    
-    @Override
-    public void setFeatureds(List<Product> featureds) {    	
-		for (int i = 0; i < featureds.size(); i++)
-			featured.appendChild(new FeaturedView().setFeatured(featureds.get(i)).getElement());
-    }*/
     
     // ********************************************************************************************
     // ************************************** Categories ******************************************
     // ********************************************************************************************
     
-    @UiField
-    FlowPanel categoriesPanel;
-    
-    @Override
+    /*@Override
     public void setCategories(List<Category> categories) {
 		for (int i = 0; i < categories.size(); i++)
 			categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
-    }
+    }*/
     
     // ********************************************************************************************
     // **************************************** Brands ********************************************

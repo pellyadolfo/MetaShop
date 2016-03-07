@@ -1,4 +1,4 @@
-package com.metashop.app.client.widgets;
+package com.metashop.app.client.widget.categories;
 
 import java.util.List;
 

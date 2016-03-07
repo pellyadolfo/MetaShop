@@ -1,5 +1,4 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:w='urn:import:com.metashop.app.client.widgets'
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
 	<!-- dummy element since li cannot be top -->

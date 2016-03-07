@@ -30,8 +30,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.metashop.app.client.widgets.BrandsViewWidget;
-import com.metashop.app.client.widgets.CategoriesViewWidget;
+import com.metashop.app.client.widget.brands.BrandsViewWidget;
+import com.metashop.app.client.widget.categories.CategoriesViewWidget;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 

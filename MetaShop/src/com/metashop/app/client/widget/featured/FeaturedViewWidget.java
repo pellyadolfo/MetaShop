@@ -1,9 +1,11 @@
-package com.metashop.app.client.widgets;
+package com.metashop.app.client.widget.featured;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.ParagraphElement;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 
 /*
  * #%L
@@ -27,27 +29,27 @@ import com.google.gwt.dom.client.ParagraphElement;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.metashop.app.data.Product;
 
-public class ProductViewWidget extends Composite {
+public class FeaturedViewWidget extends Composite {
 	
-    interface Binder extends UiBinder<Widget, ProductViewWidget> {
+	
+    interface Binder extends UiBinder<Widget, FeaturedViewWidget> {
     }
     
     private static Binder binder = GWT.create(Binder.class);
 
-    public ProductViewWidget() {
+    public FeaturedViewWidget() {
         initWidget(binder.createAndBindUi(this));
     }
-
+	
     @UiField
-    HTMLPanel productcell;
-    
-    @UiField
-    ParagraphElement name;
+    Label name;
     
     @UiField
     HeadingElement price;
@@ -55,12 +57,30 @@ public class ProductViewWidget extends Composite {
     @UiField
     ImageElement image;
     
-    public ProductViewWidget setRecommended(Product productVO, int slotsOf12) {
+    @UiField
+    ImageElement newItem;
+    
+    @UiField
+    ImageElement sale;
+
+    public FeaturedViewWidget setFeatured(Product productVO) {
     	
-    	productcell.setStyleName("col-sm-" + slotsOf12);
-    	name.setInnerText(productVO.getName());
+    	//name.setInnerText(productVO.getName());
+    	name.setText(productVO.getName());
+    	name.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				//placeManager.
+			}
+		});
     	price.setInnerText(productVO.getPrice() + productVO.getCurrency());
     	image.setSrc(productVO.getUrl());
+    	
+    	if (!productVO.isNew())
+    		newItem.removeFromParent();
+    	if (!productVO.isSale())
+    		sale.removeFromParent();
     	
     	return this;
     }

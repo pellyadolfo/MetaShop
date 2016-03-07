@@ -1,4 +1,4 @@
-package com.metashop.app.client.widgets;
+package com.metashop.app.client.widget.brands;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.AnchorElement;

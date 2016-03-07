@@ -2,7 +2,6 @@ package com.metashop.app.client.home;
 
 import java.util.List;
 
-import org.gwtbootstrap3.client.ui.ListGroup;
 import org.gwtbootstrap3.client.ui.NavTabs;
 import org.gwtbootstrap3.client.ui.TabContent;
 import org.gwtbootstrap3.client.ui.TabListItem;
@@ -10,27 +9,6 @@ import org.gwtbootstrap3.client.ui.TabPane;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 
 import com.google.gwt.dom.client.UListElement;
-
-/*
- * #%L
- * GwtBootstrap3
- * %%
- * Copyright (C) 2013 GwtBootstrap3
- * %%
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * #L%
- */
-
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -38,10 +16,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.metashop.app.client.widget.brands.BrandsView;
-import com.metashop.app.client.widget.categories.CategoriesView;
-import com.metashop.app.data.Brand;
-import com.metashop.app.data.Category;
 import com.metashop.app.data.SubCategory;
 
 public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements HomePresenter.MyView {
@@ -92,10 +66,10 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     // ********************************************************************************************
     
     @UiField 
-    NavTabs navs;
+    NavTabs subcategoriesnavs;
     
     @UiField
-    TabContent tabContent;
+    TabContent subcategoriesTabContent;
     
     @Override
     public void setSubCategories(List<SubCategory> subcategories) {
@@ -106,7 +80,7 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     		tabListItem.setText(subcategories.get(i).getName());
     		tabListItem.setHref("#" + subcategories.get(i).getName().replace(" ", "").toLowerCase());
     		tabListItem.setDataToggle(Toggle.TAB);
-    		navs.add(tabListItem);
+    		subcategoriesnavs.add(tabListItem);
     		
     		// add products below
 			TabPane tabPane = new TabPane();

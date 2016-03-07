@@ -6,7 +6,6 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.metashop.app.data.Category;
-import com.metashop.app.data.Product;
 
 public class CategoriesPresenter extends PresenterWidget<CategoriesPresenter.MyView> implements CategoriesUiHandlers {
  

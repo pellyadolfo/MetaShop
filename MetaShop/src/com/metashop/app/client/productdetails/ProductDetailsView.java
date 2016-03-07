@@ -33,9 +33,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.metashop.app.client.home.HomePresenter;
-import com.metashop.app.client.widget.brands.BrandsView;
-import com.metashop.app.client.widget.categories.CategoriesView;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 

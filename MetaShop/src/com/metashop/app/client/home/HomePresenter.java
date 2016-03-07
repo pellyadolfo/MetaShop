@@ -1,8 +1,6 @@
 package com.metashop.app.client.home;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -35,7 +33,6 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
-import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
@@ -45,8 +42,6 @@ import com.metashop.app.client.widget.brands.BrandsPresenter;
 import com.metashop.app.client.widget.categories.CategoriesPresenter;
 import com.metashop.app.client.widget.featured.FeaturedPresenter;
 import com.metashop.app.client.widget.product.ProductPresenter;
-import com.metashop.app.data.Brand;
-import com.metashop.app.data.Category;
 import com.metashop.app.data.SubCategory;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
@@ -72,7 +67,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     /**
      * Use this in leaf presenters, inside their {@link #revealInParent} method.
      */
-    //public static final NestedSlot TYPE_CATEGORY = new NestedSlot();
     
     private final DispatchAsync dispatcher;
     private final PlaceManager placeManager;
@@ -133,8 +127,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
             @Override
             public void onSuccess(GetBrandsResult result) {
-            	Logger rootLogger = Logger.getLogger("");
-            	rootLogger.log(Level.SEVERE, "pageIndex selected: ");	
             	
             	for(int i = 0; i < result.getBrands().size(); i++) {
             		BrandsPresenter brandsPresenter = brandsPresenterProvider.get();
@@ -195,6 +187,9 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
         });
     }
     
+    // load subcategories
+    public static final Slot<ProductPresenter> SLOT_SUBCATEGORIES = new Slot<ProductPresenter>();
+    @Inject Provider<ProductPresenter> subCategoriesPresenterProvider;
     public void loadSubCategories() {
         dispatcher.execute(new GetSubCategoriesRequest("textToServer"), new AsyncCallback<GetSubCategoriesResult>() {
 	        @Override

@@ -27,9 +27,11 @@ import com.google.gwt.dom.client.UListElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.metashop.app.client.products.ProductsPresenter;
 import com.metashop.app.data.Brand;
 import com.metashop.app.data.Category;
 
@@ -43,28 +45,21 @@ public class BlogView extends ViewWithUiHandlers<BlogUiHandlers> implements Blog
     }
     
     // ********************************************************************************************
-    // ************************************** Categories ******************************************
+    // **************************************** Slots *********************************************
     // ********************************************************************************************
     
     @UiField
     FlowPanel categoriesPanel;
     
-    @Override
-    public void setCategories(List<Category> categories) {
-		//for (int i = 0; i < categories.size(); i++)
-		//	categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
-    }
-    
-    // ********************************************************************************************
-    // **************************************** Brands ********************************************
-    // ********************************************************************************************
-    
     @UiField
-    UListElement ul;
+    UListElement brands;
     
     @Override
-    public void setBrands(List<Brand> brands) {    	
-		///for (int i = 0; i < brands.size(); i++)
-		//	ul.appendChild(new BrandsView().setBrand(brands.get(i)).getElement().getChild(0));
+    public void addToSlot(final Object slot, final IsWidget content) {
+    	if (slot == BlogPresenter.SLOT_CATEGORIES)
+        	categoriesPanel.add(content);
+    	else if (slot == BlogPresenter.SLOT_BRANDS)
+    		brands.appendChild(content.asWidget().getElement().getChild(0));
+        else super.addToSlot(slot, content);
     }
 }

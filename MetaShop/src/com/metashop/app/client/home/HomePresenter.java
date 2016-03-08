@@ -64,10 +64,6 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     	void setSubCategories(List<SubCategory> subcategories);
     }
     
-    /**
-     * Use this in leaf presenters, inside their {@link #revealInParent} method.
-     */
-    
     private final DispatchAsync dispatcher;
     private final PlaceManager placeManager;
 

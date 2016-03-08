@@ -16,14 +16,14 @@ import com.metashop.app.client.checkout.CheckOutPresenter;
 import com.metashop.app.client.checkout.CheckOutView;
 import com.metashop.app.client.contactus.ContactUsPresenter;
 import com.metashop.app.client.contactus.ContactUsView;
+import com.metashop.app.client.details.DetailsPresenter;
+import com.metashop.app.client.details.DetailsView;
 import com.metashop.app.client.error.ErrorPresenter;
 import com.metashop.app.client.error.ErrorView;
 import com.metashop.app.client.home.HomePresenter;
 import com.metashop.app.client.home.HomeView;
 import com.metashop.app.client.login.LoginPresenter;
 import com.metashop.app.client.login.LoginView;
-import com.metashop.app.client.productdetails.ProductDetailsPresenter;
-import com.metashop.app.client.productdetails.ProductDetailsView;
 import com.metashop.app.client.products.ProductsPresenter;
 import com.metashop.app.client.products.ProductsView;
 import com.metashop.app.client.widget.brands.BrandsPresenter;
@@ -53,23 +53,22 @@ public class ApplicationModule extends AbstractPresenterModule {
         bindPresenter(CartPresenter.class, CartPresenter.MyView.class, CartView.class, CartPresenter.MyProxy.class);
         bindPresenter(CheckOutPresenter.class, CheckOutPresenter.MyView.class, CheckOutView.class, CheckOutPresenter.MyProxy.class);
         bindPresenter(ContactUsPresenter.class, ContactUsPresenter.MyView.class, ContactUsView.class, ContactUsPresenter.MyProxy.class);
+        bindPresenter(DetailsPresenter.class, DetailsPresenter.MyView.class, DetailsView.class, DetailsPresenter.MyProxy.class);
         bindPresenter(ErrorPresenter.class, ErrorPresenter.MyView.class, ErrorView.class, ErrorPresenter.MyProxy.class);
         bindPresenter(HomePresenter.class, HomePresenter.MyView.class, HomeView.class, HomePresenter.MyProxy.class);
         bindPresenter(LoginPresenter.class, LoginPresenter.MyView.class, LoginView.class, LoginPresenter.MyProxy.class);
-        bindPresenter(ProductDetailsPresenter.class, ProductDetailsPresenter.MyView.class, ProductDetailsView.class, ProductDetailsPresenter.MyProxy.class);
         bindPresenter(ProductsPresenter.class, ProductsPresenter.MyView.class, ProductsView.class, ProductsPresenter.MyProxy.class);
         
         // widgets
-        bindPresenterWidget(ProductPresenter.class, ProductPresenter.MyView.class, ProductView.class);
-        bindPresenterWidget(FeaturedPresenter.class, FeaturedPresenter.MyView.class, FeaturedView.class);
-        bindPresenterWidget(CategoriesPresenter.class, CategoriesPresenter.MyView.class, CategoriesView.class);
         bindPresenterWidget(BrandsPresenter.class, BrandsPresenter.MyView.class, BrandsView.class);
+        bindPresenterWidget(CategoriesPresenter.class, CategoriesPresenter.MyView.class, CategoriesView.class);
+        bindPresenterWidget(FeaturedPresenter.class, FeaturedPresenter.MyView.class, FeaturedView.class);
+        bindPresenterWidget(ProductPresenter.class, ProductPresenter.MyView.class, ProductView.class);
         
         // bind constants
         bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.HOME);
         bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.ERROR);
         bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.ERROR);
-        
 
         //install(new ServerModule());
     }

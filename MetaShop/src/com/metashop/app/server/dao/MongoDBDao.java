@@ -120,18 +120,23 @@ public class MongoDBDao extends AServicesFacade {
 	// *************************************************************************************************
 	// Manage Connection
 	// *************************************************************************************************
-	private static MongoClient mongoClient = null;
-	private static MongoDatabase db = null;
+	private MongoClient mongoClient = null;
+	private MongoDatabase db = null;
+	
 	@Override
 	protected void pre() {
 	}
+	
 	@Override
 	protected void post() {
+		System.out.println("closing");
 		mongoClient.close();
 		db = null;
 	}
+	
 	private MongoCollection<Document> getCollection(String name) {
 		if (db == null || mongoClient == null) {
+			System.out.println("opening");
 			mongoClient = new MongoClient( "localhost" , 27017 );
 			db = mongoClient.getDatabase( "comparephone" );
 		}

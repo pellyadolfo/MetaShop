@@ -1,5 +1,8 @@
 package com.metashop.app.client.widget.featured;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -27,14 +30,15 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.metashop.app.data.Product;
 
-public class FeaturedView extends ViewImpl implements FeaturedPresenter.MyView {
+public class FeaturedView extends ViewWithUiHandlers<FeaturedUiHandlers> implements FeaturedPresenter.MyView {
 	
     interface Binder extends UiBinder<Widget, FeaturedView> {
     }
@@ -43,12 +47,6 @@ public class FeaturedView extends ViewImpl implements FeaturedPresenter.MyView {
     public FeaturedView(Binder binder) {
         initWidget(binder.createAndBindUi(this));
     }
-    
-	@Override
-	public void setUiHandlers(FeaturedUiHandlers uiHandlers) {
-		// TODO Auto-generated method stub
-		
-	}
 	
     @UiField
     HTMLPanel featuredcell;
@@ -67,6 +65,13 @@ public class FeaturedView extends ViewImpl implements FeaturedPresenter.MyView {
     
     @UiField
     ImageElement sale;
+    
+    @UiHandler("name")
+    public void onClick(ClickEvent event) {
+		Logger logger = Logger.getLogger("ppp");
+		logger.log(Level.SEVERE, "retardeds4");
+    	getUiHandlers().showProductDetails();
+    }
 
     public void setProduct(Product productVO, int slotsOf12) {
     	

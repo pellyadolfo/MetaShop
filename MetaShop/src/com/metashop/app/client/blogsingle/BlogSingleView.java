@@ -1,7 +1,5 @@
 package com.metashop.app.client.blogsingle;
 
-import java.util.List;
-
 import com.google.gwt.dom.client.UListElement;
 
 /*
@@ -31,9 +29,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.metashop.app.client.blog.BlogPresenter;
-import com.metashop.app.data.Brand;
-import com.metashop.app.data.Category;
 
 public class BlogSingleView extends ViewWithUiHandlers<BlogSingleUiHandlers> implements BlogSinglePresenter.MyView {
     interface Binder extends UiBinder<Widget, BlogSingleView> {

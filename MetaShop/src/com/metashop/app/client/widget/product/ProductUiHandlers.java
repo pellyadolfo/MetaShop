@@ -19,5 +19,5 @@ package com.metashop.app.client.widget.product;
 import com.gwtplatform.mvp.client.UiHandlers;
 
 public interface ProductUiHandlers extends UiHandlers {
-    void showProductDetails(String name);
+    void showProductDetails();
 }

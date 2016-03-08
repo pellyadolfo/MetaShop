@@ -1,7 +1,5 @@
 package com.metashop.app.client.blogsingle;
 
-import java.util.List;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /*
@@ -40,8 +38,6 @@ import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
 import com.metashop.app.client.widget.brands.BrandsPresenter;
 import com.metashop.app.client.widget.categories.CategoriesPresenter;
-import com.metashop.app.data.Brand;
-import com.metashop.app.data.Category;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
 import com.metashop.app.dispatch.GetCategoriesRequest;

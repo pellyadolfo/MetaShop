@@ -24,7 +24,6 @@ public class ProductView extends ViewImpl implements ProductPresenter.MyView {
 	@Override
 	public void setUiHandlers(ProductUiHandlers uiHandlers) {
 		// TODO Auto-generated method stub
-		
 	}
 
     @UiField

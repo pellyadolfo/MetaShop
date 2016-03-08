@@ -29,7 +29,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.metashop.app.client.home.HomePresenter;
 
 public class DetailsView extends ViewWithUiHandlers<DetailsUiHandlers> implements DetailsPresenter.MyView {
     interface Binder extends UiBinder<Widget, DetailsView> {

@@ -1,5 +1,8 @@
 package com.metashop.app.client.details;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /*
@@ -31,11 +34,14 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
+import com.metashop.app.client.events.ShowDetailsEvent;
+import com.metashop.app.client.events.ShowDetailsEvent.ShowDetailsHandler;
 import com.metashop.app.client.widget.brands.BrandsPresenter;
 import com.metashop.app.client.widget.categories.CategoriesPresenter;
 import com.metashop.app.client.widget.product.ProductPresenter;
@@ -46,7 +52,7 @@ import com.metashop.app.dispatch.GetCategoriesResult;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetRecommendedResult;
 
-public class DetailsPresenter extends Presenter<DetailsPresenter.MyView, DetailsPresenter.MyProxy> implements DetailsUiHandlers {
+public class DetailsPresenter extends Presenter<DetailsPresenter.MyView, DetailsPresenter.MyProxy> implements DetailsUiHandlers, ShowDetailsHandler {
     @ProxyCodeSplit	
     @NameToken(NameTokens.PRODUCTDETAILS)
     public interface MyProxy extends ProxyPlace<DetailsPresenter> {
@@ -150,4 +156,12 @@ public class DetailsPresenter extends Presenter<DetailsPresenter.MyView, Details
     	// TODO Auto-generated method stub
     	
     }
+
+    @ProxyEvent
+	@Override
+	public void onShowDetailsEvent(ShowDetailsEvent event) {
+		// TODO Auto-generated method stub
+		Logger logger = Logger.getLogger("ppp");
+		logger.log(Level.SEVERE, "process event");
+	}
 }

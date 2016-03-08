@@ -25,7 +25,7 @@ public class ProductPresenter extends PresenterWidget<ProductPresenter.MyView> i
     }
     
     @Override
-    public void showProductDetails(String name) {
+    public void showProductDetails() {
     	// TODO Auto-generated method stub
     	
     }

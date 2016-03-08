@@ -1,9 +1,5 @@
 package com.metashop.app.client.productdetails;
 
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.google.gwt.dom.client.UListElement;
 
 /*
@@ -33,8 +29,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.metashop.app.data.Brand;
-import com.metashop.app.data.Category;
+import com.metashop.app.client.home.HomePresenter;
 
 public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandlers> implements ProductDetailsPresenter.MyView {
     interface Binder extends UiBinder<Widget, ProductDetailsView> {
@@ -44,36 +39,16 @@ public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandl
     ProductDetailsView(final Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
-        
+    
     // ********************************************************************************************
-    // ************************************** Categories ******************************************
+    // **************************************** Slots *********************************************
     // ********************************************************************************************
     
     @UiField
     FlowPanel categoriesPanel;
     
-    @Override
-    public void setCategories(List<Category> categories) {
-		//for (int i = 0; i < categories.size(); i++)
-		//	categoriesPanel.add(new CategoriesView().setCategory(categories.get(i)));
-    }
-    
-    // ********************************************************************************************
-    // **************************************** Brands ********************************************
-    // ********************************************************************************************
-    
     @UiField
-    UListElement ul;
-    
-    @Override
-    public void setBrands(List<Brand> brands) {    	
-		//for (int i = 0; i < brands.size(); i++)
-		//	ul.appendChild(new BrandsView().setBrand(brands.get(i)).getElement().getChild(0));
-    }
-    
-    // ********************************************************************************************
-    // ************************************* Recommended ******************************************
-    // ********************************************************************************************
+    UListElement brands;
     
     @UiField
     FlowPanel divrecommended1;
@@ -83,14 +58,14 @@ public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandl
     
     @Override
     public void addToSlot(final Object slot, final IsWidget content) {
-        if (slot == ProductDetailsPresenter.SLOT_RECOMMENDED1) {
-        	Logger rootLogger = Logger.getLogger("pipo");
-        	rootLogger.log(Level.SEVERE, "pageIndex selected45 " + content);	
+    	if (slot == ProductDetailsPresenter.SLOT_CATEGORIES)
+        	categoriesPanel.add(content);
+    	else if (slot == ProductDetailsPresenter.SLOT_BRANDS)
+    		brands.appendChild(content.asWidget().getElement().getChild(0));
+    	else if (slot == ProductDetailsPresenter.SLOT_RECOMMENDED1)	
         	divrecommended1.add(content);
-        } else if (slot == ProductDetailsPresenter.SLOT_RECOMMENDED2) {
-        	Logger rootLogger = Logger.getLogger("pipo");
-        	rootLogger.log(Level.SEVERE, "pageIndex selected45 " + content);	
+        else if (slot == ProductDetailsPresenter.SLOT_RECOMMENDED2)
         	divrecommended2.add(content);
-        } else super.addToSlot(slot, content);
+        else super.addToSlot(slot, content);
     }
 }

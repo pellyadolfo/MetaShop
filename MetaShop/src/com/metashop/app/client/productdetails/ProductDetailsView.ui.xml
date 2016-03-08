@@ -158,7 +158,7 @@
 						<div class="brands_products">
 							<h2>Brands</h2>
 							<div class="brands-name">
-								<ul ui:field="ul" class="nav nav-pills nav-stacked"/>
+								<ul ui:field="brands" class="nav nav-pills nav-stacked"/>
 							</div>
 						</div>
 						<!--/brands_products-->

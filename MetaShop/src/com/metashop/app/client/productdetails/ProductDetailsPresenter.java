@@ -1,7 +1,5 @@
 package com.metashop.app.client.productdetails;
 
-import java.util.List;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /*
@@ -38,9 +36,9 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.metashop.app.client.NameTokens;
 import com.metashop.app.client.application.ApplicationPresenter;
+import com.metashop.app.client.widget.brands.BrandsPresenter;
+import com.metashop.app.client.widget.categories.CategoriesPresenter;
 import com.metashop.app.client.widget.product.ProductPresenter;
-import com.metashop.app.data.Brand;
-import com.metashop.app.data.Category;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
 import com.metashop.app.dispatch.GetCategoriesRequest;
@@ -55,9 +53,6 @@ public class ProductDetailsPresenter extends Presenter<ProductDetailsPresenter.M
     }
     
     public interface MyView extends View, HasUiHandlers<ProductDetailsUiHandlers> {
-    	void setCategories(List<Category> categories);
-    	void setBrands(List<Brand> brads);
-    	//void setRecommended(List<Product> recommended);
     }
     
     private final DispatchAsync dispatcher;
@@ -81,6 +76,9 @@ public class ProductDetailsPresenter extends Presenter<ProductDetailsPresenter.M
         loadRecommended();
     }
     
+    // load categories
+    public static final Slot<CategoriesPresenter> SLOT_CATEGORIES = new Slot<CategoriesPresenter>();
+    @Inject Provider<CategoriesPresenter> categoriesPresenterProvider;
     public void loadCategories() {
         dispatcher.execute(new GetCategoriesRequest("textToServer"), new AsyncCallback<GetCategoriesResult>() {
 	        @Override
@@ -90,11 +88,18 @@ public class ProductDetailsPresenter extends Presenter<ProductDetailsPresenter.M
 	
 	        @Override
 	        public void onSuccess(GetCategoriesResult result) {
-	        	getView().setCategories(result.getCategories());
+            	for(int i = 0; i < result.getCategories().size(); i++) {
+            		CategoriesPresenter categoriesPresenter = categoriesPresenterProvider.get();
+            		categoriesPresenter.setCategory(result.getCategories().get(i));
+    				getView().addToSlot(SLOT_CATEGORIES, categoriesPresenter);
+            	}
 	        }
 	    });
     }
     
+    // load brands
+    public static final Slot<BrandsPresenter> SLOT_BRANDS = new Slot<BrandsPresenter>();
+    @Inject Provider<BrandsPresenter> brandsPresenterProvider;
     public void loadBrands() {
         dispatcher.execute(new GetBrandsRequest("textToServer"), new AsyncCallback<GetBrandsResult>() {
             @Override
@@ -104,14 +109,18 @@ public class ProductDetailsPresenter extends Presenter<ProductDetailsPresenter.M
 
             @Override
             public void onSuccess(GetBrandsResult result) {
-	        	getView().setBrands(result.getBrands());
+            	
+            	for(int i = 0; i < result.getBrands().size(); i++) {
+            		BrandsPresenter brandsPresenter = brandsPresenterProvider.get();
+            		brandsPresenter.setBrand(result.getBrands().get(i));
+    				getView().addToSlot(SLOT_BRANDS, brandsPresenter);
+            	}
             }
         });
     }
     
     public static final Slot<ProductPresenter> SLOT_RECOMMENDED1 = new Slot<ProductPresenter>();
     public static final Slot<ProductPresenter> SLOT_RECOMMENDED2 = new Slot<ProductPresenter>();
-
     @Inject Provider<ProductPresenter> productPresenterProvider;
     public void loadRecommended() {
         dispatcher.execute(new GetRecommendedRequest("textToServer"), new AsyncCallback<GetRecommendedResult>() {

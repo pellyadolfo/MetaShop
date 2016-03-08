@@ -173,6 +173,7 @@ public class DetailsPresenter extends Presenter<DetailsPresenter.MyView, Details
             @Override
             public void onSuccess(GetDetailsResult result) {
         		getView().setProduct(result.getDetails());
+                getProxy().manualReveal(DetailsPresenter.this);
             }
         });
 	}

@@ -45,10 +45,13 @@ import com.metashop.app.client.events.ShowDetailsEvent.ShowDetailsHandler;
 import com.metashop.app.client.widget.brands.BrandsPresenter;
 import com.metashop.app.client.widget.categories.CategoriesPresenter;
 import com.metashop.app.client.widget.product.ProductPresenter;
+import com.metashop.app.data.Product;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetBrandsResult;
 import com.metashop.app.dispatch.GetCategoriesRequest;
 import com.metashop.app.dispatch.GetCategoriesResult;
+import com.metashop.app.dispatch.GetDetailsRequest;
+import com.metashop.app.dispatch.GetDetailsResult;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetRecommendedResult;
 
@@ -59,6 +62,7 @@ public class DetailsPresenter extends Presenter<DetailsPresenter.MyView, Details
     }
     
     public interface MyView extends View, HasUiHandlers<DetailsUiHandlers> {
+    	void setProduct(Product product);
     }
     
     private final DispatchAsync dispatcher;
@@ -160,8 +164,16 @@ public class DetailsPresenter extends Presenter<DetailsPresenter.MyView, Details
     @ProxyEvent
 	@Override
 	public void onShowDetailsEvent(ShowDetailsEvent event) {
-		// TODO Auto-generated method stub
-		Logger logger = Logger.getLogger("ppp");
-		logger.log(Level.SEVERE, "process event");
+        dispatcher.execute(new GetDetailsRequest("textToServer"), new AsyncCallback<GetDetailsResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                //getView().setServerResponse("An error occurred: " + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetDetailsResult result) {
+        		getView().setProduct(result.getDetails());
+            }
+        });
 	}
 }

@@ -70,7 +70,17 @@ public class MongoDBDao extends AServicesFacade {
 		    @Override
 		    public void apply(final Document document) {
 				String name = (String) ((Document) document.get("name")).get("id");			
-				products.add(new Product().setName(name).setPrice(56).setCurrency("$").setUrl("images/photo/F-12C.jpg"));
+				products.add(new Product()
+						.setName(name)
+						.setPrice(56)
+						.setCurrency("$")
+						.setUrl("images/photo/F-12C.jpg")
+						.setCondition("New")
+						.setAvailability("In Stock")
+						.setBrand("Eshopper")
+						.setId("1089772")
+						.setImage("images/product-details/1.jpg")
+						.setImages(new ArrayList(Arrays.asList("images/product-details/similar1.jpg", "images/product-details/similar2.jpg", "images/product-details/similar3.jpg"))));
 		    }
 		});
 
@@ -88,7 +98,17 @@ public class MongoDBDao extends AServicesFacade {
 		    @Override
 		    public void apply(final Document document) {
 				String name = (String) ((Document) document.get("name")).get("id");			
-				products.add(new Product().setName(name).setPrice(56).setCurrency("$").setUrl("images/photo/F-12C.jpg"));
+				products.add(new Product()
+						.setName(name)
+						.setPrice(56)
+						.setCurrency("$")
+						.setUrl("images/photo/F-12C.jpg")
+						.setCondition("New")
+						.setAvailability("In Stock")
+						.setBrand("Eshopper")
+						.setId("1089772")
+						.setImage("images/product-details/1.jpg")
+						.setImages(new ArrayList(Arrays.asList("images/product-details/similar1.jpg", "images/product-details/similar2.jpg", "images/product-details/similar3.jpg"))));
 		    }
 		});
 		
@@ -110,7 +130,16 @@ public class MongoDBDao extends AServicesFacade {
 	        for (int i = 0; i < 4; i++) {
 	        	Document item = (Document) ((List<Document>) document.get("docs")).get(i);
 	        	Document name = (Document) item.get("name");
-	        	subCategory.addProduct(new Product().setName(name.get("id") + "").setPrice(56).setCurrency("$").setUrl("images/photo/F-12C.jpg"));
+	        	subCategory.addProduct(new Product()
+	        			.setName(name.get("id") + "")
+	        			.setPrice(50)
+						.setCurrency("$")
+						.setCondition("New")
+						.setAvailability("In Stock")
+						.setBrand("Eshopper")
+						.setId("1089772")
+						.setImage("images/product-details/1.jpg")
+						.setImages(new ArrayList(Arrays.asList("images/product-details/similar1.jpg", "images/product-details/similar2.jpg", "images/product-details/similar3.jpg"))));
 	        }
 			result.add(subCategory);
 	    }
@@ -145,8 +174,12 @@ public class MongoDBDao extends AServicesFacade {
 	@Override
 	protected void post() {
 		System.out.println("closing");
-		mongoClient.close();
+		if (mongoClient != null)
+			mongoClient.close();
+		
+		mongoClient = null;
 		db = null;
+		System.out.println("closed");
 	}
 	
 	private MongoCollection<Document> getCollection(String name) {

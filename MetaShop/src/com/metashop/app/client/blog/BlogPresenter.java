@@ -119,11 +119,4 @@ public class BlogPresenter extends Presenter<BlogPresenter.MyView, BlogPresenter
             }
         });
     }
-    
-    @Override
-    public void sendName(String name) {
-    	// TODO Auto-generated method stub
-    	
-    	System.out.println("is here");
-    }
 }

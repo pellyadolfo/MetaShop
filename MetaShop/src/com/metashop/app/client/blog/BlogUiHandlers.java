@@ -19,5 +19,4 @@ package com.metashop.app.client.blog;
 import com.gwtplatform.mvp.client.UiHandlers;
 
 public interface BlogUiHandlers extends UiHandlers {
-    void sendName(String name);
 }

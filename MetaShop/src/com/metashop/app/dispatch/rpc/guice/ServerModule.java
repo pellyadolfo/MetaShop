@@ -19,11 +19,13 @@ package com.metashop.app.dispatch.rpc.guice;
 import com.gwtplatform.dispatch.rpc.server.guice.HandlerModule;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetCategoriesRequest;
+import com.metashop.app.dispatch.GetDetailsRequest;
 import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetSubCategoriesRequest;
 import com.metashop.app.middleware.GetBrandsHandler;
 import com.metashop.app.middleware.GetCategoriesHandler;
+import com.metashop.app.middleware.GetDetailsHandler;
 import com.metashop.app.middleware.GetFeaturedHandler;
 import com.metashop.app.middleware.GetRecommendedHandler;
 import com.metashop.app.middleware.GetSubCategoriesHandler;
@@ -39,5 +41,6 @@ public class ServerModule extends HandlerModule {
         bindHandler(GetFeaturedRequest.class, GetFeaturedHandler.class);
         bindHandler(GetRecommendedRequest.class, GetRecommendedHandler.class);
         bindHandler(GetSubCategoriesRequest.class, GetSubCategoriesHandler.class);
+        bindHandler(GetDetailsRequest.class, GetDetailsHandler.class);
     }
 }

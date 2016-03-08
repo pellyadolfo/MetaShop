@@ -12,6 +12,7 @@ import com.metashop.app.data.Product;
 import com.metashop.app.data.SubCategory;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetCategoriesRequest;
+import com.metashop.app.dispatch.GetDetailsRequest;
 import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetSubCategoriesRequest;
@@ -115,6 +116,20 @@ public class MongoDBDao extends AServicesFacade {
 	    }
 
 		return result;
+	}
+	
+	@Override
+	protected Product getDetailsImpl(GetDetailsRequest action) throws Throwable {
+		// TODO Auto-generated method stub
+		return new Product().setName("Anne Klein Sleeveless Colorblock Scuba")
+							.setPrice(50)
+							.setCurrency("$")
+							.setCondition("New")
+							.setAvailability("In Stock")
+							.setBrand("Eshopper")
+							.setId("1089772")
+							.setImage("images/product-details/1.jpg")
+							.setImages(new ArrayList(Arrays.asList("images/product-details/similar1.jpg", "images/product-details/similar2.jpg", "images/product-details/similar3.jpg")));
 	}
 	
 	// *************************************************************************************************

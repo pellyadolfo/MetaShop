@@ -9,6 +9,7 @@ import com.metashop.app.data.Product;
 import com.metashop.app.data.SubCategory;
 import com.metashop.app.dispatch.GetBrandsRequest;
 import com.metashop.app.dispatch.GetCategoriesRequest;
+import com.metashop.app.dispatch.GetDetailsRequest;
 import com.metashop.app.dispatch.GetFeaturedRequest;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetSubCategoriesRequest;
@@ -24,6 +25,9 @@ public abstract class AServicesFacade {
 	public List<Product> getFeatured(GetFeaturedRequest action) {
     	try { pre(); return getFeaturedImpl(action); } catch (Throwable e) { handleException(e, action); } finally {post();} return new ArrayList<Product>();
 	}
+	public Product getDetails(GetDetailsRequest action) {
+    	try { pre(); return getDetailsImpl(action); } catch (Throwable e) { handleException(e, action); } finally {post();} return null;
+	}
 	public List<Product> getRecommended(GetRecommendedRequest action) {
     	try { pre(); return getRecommendedImpl(action); } catch (Throwable e) { handleException(e, action); } finally {post();} return new ArrayList<Product>();
 	}
@@ -33,6 +37,7 @@ public abstract class AServicesFacade {
     protected abstract List<Brand> getBrandsImpl(GetBrandsRequest action) throws Throwable;
     protected abstract List<Category> getCategoriesImpl(GetCategoriesRequest action) throws Throwable;
     protected abstract List<Product> getFeaturedImpl(GetFeaturedRequest action) throws Throwable;
+    protected abstract Product getDetailsImpl(GetDetailsRequest action) throws Throwable;
     protected abstract List<Product> getRecommendedImpl(GetRecommendedRequest action) throws Throwable;
     protected abstract List<SubCategory> getSubCategoriesImpl(GetSubCategoriesRequest action) throws Throwable;
 	

@@ -1,6 +1,7 @@
 package com.metashop.app.data;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Product implements Serializable {
 	/**
@@ -71,6 +72,72 @@ public class Product implements Serializable {
 
 	public Product setUrl(String url) {
 		this.url = url;
+		return this;
+	}
+	
+	String id;
+
+	public String getId() {
+		return id;
+	}
+
+	public Product setId(String id) {
+		this.id = id;
+		return this;
+	}
+	
+	String availability;
+
+	public String getAvailability() {
+		return availability;
+	}
+
+	public Product setAvailability(String availability) {
+		this.availability = availability;
+		return this;
+	}
+	
+	String condition;
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public Product setCondition(String condition) {
+		this.condition = condition;
+		return this;
+	}
+	
+	String brand;
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public Product setBrand(String brand) {
+		this.brand = brand;
+		return this;
+	}
+	
+	String image;
+	
+	public String getImage() {
+		return image;
+	}
+
+	public Product setImage(String image) {
+		this.image = image;
+		return this;
+	}
+
+	List<String> images;
+
+	public List<String> getImages() {
+		return images;
+	}
+
+	public Product setImages(List<String> images) {
+		this.images = images;
 		return this;
 	}
 }

@@ -1,4 +1,4 @@
-package com.metashop.app.client.productdetails;
+package com.metashop.app.client.details;
 
 import com.google.gwt.dom.client.UListElement;
 
@@ -31,12 +31,12 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.metashop.app.client.home.HomePresenter;
 
-public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandlers> implements ProductDetailsPresenter.MyView {
-    interface Binder extends UiBinder<Widget, ProductDetailsView> {
+public class DetailsView extends ViewWithUiHandlers<DetailsUiHandlers> implements DetailsPresenter.MyView {
+    interface Binder extends UiBinder<Widget, DetailsView> {
     }
 
     @Inject
-    ProductDetailsView(final Binder uiBinder) {
+    DetailsView(final Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
     }
     
@@ -58,13 +58,13 @@ public class ProductDetailsView extends ViewWithUiHandlers<ProductDetailsUiHandl
     
     @Override
     public void addToSlot(final Object slot, final IsWidget content) {
-    	if (slot == ProductDetailsPresenter.SLOT_CATEGORIES)
+    	if (slot == DetailsPresenter.SLOT_CATEGORIES)
         	categoriesPanel.add(content);
-    	else if (slot == ProductDetailsPresenter.SLOT_BRANDS)
+    	else if (slot == DetailsPresenter.SLOT_BRANDS)
     		brands.appendChild(content.asWidget().getElement().getChild(0));
-    	else if (slot == ProductDetailsPresenter.SLOT_RECOMMENDED1)	
+    	else if (slot == DetailsPresenter.SLOT_RECOMMENDED1)	
         	divrecommended1.add(content);
-        else if (slot == ProductDetailsPresenter.SLOT_RECOMMENDED2)
+        else if (slot == DetailsPresenter.SLOT_RECOMMENDED2)
         	divrecommended2.add(content);
         else super.addToSlot(slot, content);
     }

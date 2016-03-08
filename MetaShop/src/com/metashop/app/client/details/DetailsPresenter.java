@@ -1,4 +1,4 @@
-package com.metashop.app.client.productdetails;
+package com.metashop.app.client.details;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -46,20 +46,20 @@ import com.metashop.app.dispatch.GetCategoriesResult;
 import com.metashop.app.dispatch.GetRecommendedRequest;
 import com.metashop.app.dispatch.GetRecommendedResult;
 
-public class ProductDetailsPresenter extends Presenter<ProductDetailsPresenter.MyView, ProductDetailsPresenter.MyProxy> implements ProductDetailsUiHandlers {
+public class DetailsPresenter extends Presenter<DetailsPresenter.MyView, DetailsPresenter.MyProxy> implements DetailsUiHandlers {
     @ProxyCodeSplit	
     @NameToken(NameTokens.PRODUCTDETAILS)
-    public interface MyProxy extends ProxyPlace<ProductDetailsPresenter> {
+    public interface MyProxy extends ProxyPlace<DetailsPresenter> {
     }
     
-    public interface MyView extends View, HasUiHandlers<ProductDetailsUiHandlers> {
+    public interface MyView extends View, HasUiHandlers<DetailsUiHandlers> {
     }
     
     private final DispatchAsync dispatcher;
     private final PlaceManager placeManager;
 
     @Inject
-    public ProductDetailsPresenter(final EventBus eventBus,
+    public DetailsPresenter(final EventBus eventBus,
                           final MyView view,
                           final MyProxy proxy,
                           PlaceManager placeManager,		// This comes here because Proxy has been declared as place

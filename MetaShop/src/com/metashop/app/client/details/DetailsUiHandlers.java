@@ -14,10 +14,10 @@
  * the License.
  */
 
-package com.metashop.app.client.productdetails;
+package com.metashop.app.client.details;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 
-public interface ProductDetailsUiHandlers extends UiHandlers {
+public interface DetailsUiHandlers extends UiHandlers {
     void sendName(String name);
 }

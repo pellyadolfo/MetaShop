@@ -1,8 +1,5 @@
 package com.metashop.app.client.details;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /*

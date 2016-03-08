@@ -5,6 +5,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+import com.metashop.app.client.events.ShowDetailsEvent;
 import com.metashop.app.data.Product;
 
 public class ProductPresenter extends PresenterWidget<ProductPresenter.MyView> implements ProductUiHandlers {
@@ -13,8 +14,12 @@ public class ProductPresenter extends PresenterWidget<ProductPresenter.MyView> i
     	void setProduct(Product productVO, int slotsOf12);
     }
     
+    Product product;
+    
     public void setProduct(Product product, int slotsOf12) {
-        getView().setProduct(product, slotsOf12);
+    	this.product = product;
+
+    	getView().setProduct(product, slotsOf12);
     }
 
     @Inject
@@ -26,7 +31,6 @@ public class ProductPresenter extends PresenterWidget<ProductPresenter.MyView> i
     
     @Override
     public void showProductDetails() {
-    	// TODO Auto-generated method stub
-    	
+    	ShowDetailsEvent.fire(this, product);
     }
 }

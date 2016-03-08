@@ -1,12 +1,8 @@
 package com.metashop.app.client.widget.featured;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 
 /*
  * #%L
@@ -68,8 +64,6 @@ public class FeaturedView extends ViewWithUiHandlers<FeaturedUiHandlers> impleme
     
     @UiHandler("name")
     public void onClick(ClickEvent event) {
-		Logger logger = Logger.getLogger("ppp");
-		logger.log(Level.SEVERE, "retardeds4");
     	getUiHandlers().showProductDetails();
     }
 
@@ -78,13 +72,6 @@ public class FeaturedView extends ViewWithUiHandlers<FeaturedUiHandlers> impleme
     	//name.setInnerText(productVO.getName());
     	featuredcell.setStyleName("col-sm-" + slotsOf12);
     	name.setText(productVO.getName());
-    	name.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				//placeManager.
-			}
-		});
     	price.setInnerText(productVO.getPrice() + productVO.getCurrency());
     	image.setSrc(productVO.getUrl());
     	

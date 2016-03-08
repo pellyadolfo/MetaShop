@@ -8,7 +8,7 @@
 				<div class="productinfo text-center">
 					<img ui:field="image" src="images/home/recommend1.jpg" alt="" />
 					<h2 ui:field="price">$56</h2>
-					<p ui:field="name">Easy Polo Black Edition</p>
+					<g:Label ui:field="name">Easy Polo Black Edition</g:Label>
 					<a href="#" class="btn btn-default add-to-cart">
 						<i class="fa fa-shopping-cart"></i>
 						Add to cart

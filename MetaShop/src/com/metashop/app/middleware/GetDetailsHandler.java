@@ -16,8 +16,6 @@
 
 package com.metashop.app.middleware;
 
-import java.util.List;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,10 +24,7 @@ import com.google.inject.Provider;
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
-import com.metashop.app.data.Brand;
 import com.metashop.app.data.Product;
-import com.metashop.app.dispatch.GetBrandsRequest;
-import com.metashop.app.dispatch.GetBrandsResult;
 import com.metashop.app.dispatch.GetDetailsRequest;
 import com.metashop.app.dispatch.GetDetailsResult;
 
